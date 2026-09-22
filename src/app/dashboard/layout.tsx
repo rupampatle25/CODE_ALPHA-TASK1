@@ -145,10 +145,10 @@ export default async function DashboardLayout({
           </div>
           <div className="flex items-center gap-3">
             <Link
-              href="/"
+              href="/landing"
               className="text-xs text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors hidden sm:inline"
             >
-              Public Homepage
+              Public Showcase
             </Link>
             <ThemeToggle />
             <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800">

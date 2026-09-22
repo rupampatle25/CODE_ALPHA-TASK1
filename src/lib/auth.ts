@@ -1,13 +1,15 @@
 import bcrypt from "bcryptjs";
-import { SignJWT, jwtVerify } from "jose";
+import { SignJWT } from "jose";
 import { cookies } from "next/headers";
 import { db } from "./db";
+import {
+  JWT_SECRET,
+  SESSION_COOKIE_NAME,
+  verifySessionToken,
+  SessionPayload,
+} from "./session";
 
-const JWT_SECRET = new TextEncoder().encode(
-  process.env.JWT_SECRET || "lingoflow-local-dev-secret-key-at-least-32-chars-long!"
-);
-
-const SESSION_COOKIE_NAME = "lingoflow_session";
+export { SESSION_COOKIE_NAME, verifySessionToken, type SessionPayload };
 
 export async function hashPassword(password: string): Promise<string> {
   const salt = await bcrypt.genSalt(10);
@@ -28,21 +30,6 @@ export async function createSessionToken(payload: {
     .setIssuedAt()
     .setExpirationTime("7d") // 7-day session
     .sign(JWT_SECRET);
-}
-
-export async function verifySessionToken(
-  token: string
-): Promise<{ userId: string; email: string; role: string } | null> {
-  try {
-    const { payload } = await jwtVerify(token, JWT_SECRET);
-    return {
-      userId: payload.userId as string,
-      email: payload.email as string,
-      role: payload.role as string,
-    };
-  } catch {
-    return null;
-  }
 }
 
 export async function setSessionCookie(token: string) {

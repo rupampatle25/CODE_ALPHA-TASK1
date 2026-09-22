@@ -1,26 +1,71 @@
-# LingoFlow AI 🌐
-> **"Break Language Barriers. Grow Without Borders."**
+# CodeAlpha Task 1: Language Translation Tool 🌐
+### *LingoFlow AI — "Break Language Barriers. Grow Without Borders."*
 
-An industry-ready, production-oriented Language Translation, Localization, and SaaS Productivity Platform built from scratch. Designed for college project demonstrations, GitHub portfolio showcases, and commercial expansion.
+[![Next.js](https://img.shields.io/badge/Next.js-14.2.15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+[![Prisma](https://img.shields.io/badge/Prisma-5.20-2D3748?style=for-the-badge&logo=prisma)](https://www.prisma.io/)
+[![SQLite](https://img.shields.io/badge/SQLite-Zero_Config-003B57?style=for-the-badge&logo=sqlite)](https://www.sqlite.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
+
+An industry-ready, production-grade **Language Translation, Localization, and SaaS Productivity Platform** built from scratch for the **CodeAlpha Full-Stack Web Development Internship (Task 1)**.
+
+---
+
+## 📸 Screenshots Showcase
+
+### 1. Interactive Translation Studio (CodeAlpha Task 1 Workspace)
+*Live translation across 30+ languages, auto-detection, Speech-to-Text input, Text-to-Speech playback, one-click copy, and export.*
+
+![LingoFlow AI Translation Workspace](docs/screenshots/workspace_hero.png)
+
+---
+
+### 2. User Dashboard & Translation Studio
+*Authenticated user dashboard featuring monthly quota tracking, quick actions, and private workspace.*
+
+![LingoFlow AI Dashboard](docs/screenshots/dashboard.png)
+
+---
+
+### 3. Translation History & Record Management
+*Server-side paginated translation history with real-time keyword search, language filtering, audio replay, and CSV/TXT export.*
+
+![Translation History Management](docs/screenshots/history.png)
+
+---
+
+### 4. Multilingual E-Commerce Business Assistant
+*Specialized SaaS localization assistant generating tailored marketing copy for global marketplaces (Amazon, Shopify, Etsy).*
+
+![Multilingual Product Description Assistant](docs/screenshots/business_assistant.png)
+
+---
+
+### 5. Secure Authentication & Demo Login
+*Enterprise-grade security featuring bcrypt password hashing, encrypted JWT session tokens, and instant demo access.*
+
+![Secure Authentication](docs/screenshots/login.png)
 
 ---
 
 ## 🌟 Key Features
 
-### 1. Core Translation Workspace (College Task 1)
-- **Live Multilingual Translation:** Translates across 30+ major international languages with automatic language detection.
-- **Server-Side API Security:** Translation keys and external endpoints are handled securely in Next.js backend Route Handlers with Zod schema validation.
-- **Text-To-Speech (TTS) Pronunciation:** Instant, zero-latency audio vocalization using native Web Speech API in native accents for both source and translated text.
-- **One-Click Actions:** Instant clipboard copy with animated confirmation, clear text, language swapping, and `.txt` file export.
-- **Resilience & Error Handling:** Real-time character counter (up to 5,000 chars), network failure alerts, and retry triggers.
+### 1. Core Translation Workspace (CodeAlpha Task 1 Requirements)
+- 🌐 **Live Multilingual Translation:** High-speed translation across 30+ major world languages (English, Spanish, French, German, Hindi, Japanese, Chinese, Arabic, and more) with automatic source language detection.
+- 🎙️ **Voice-to-Text (STT) Speech Recognition:** Live speech input via native Web Speech API with real-time interim transcription and audio level feedback.
+- 🔊 **Text-to-Speech (TTS) Voice Synthesis:** Instant pronunciation playback with voice accent selection, pitch, and speed adjustments.
+- 📋 **Productivity Shortcuts:** One-click clipboard copy with visual feedback, text clearing, instant language swapping, and `.txt` export.
+- 🛡️ **Server-Side API Security:** Secure Next.js backend Route Handlers with Zod validation protecting translation keys and third-party endpoints.
+- 📊 **Character Counting & Length Enforcement:** Live counter enforcing up to 5,000 characters per translation request.
 
-### 2. SaaS & Business Architecture
-- **Multilingual Product Description Assistant:** Specialized e-commerce tool that converts product titles and feature lists into persuasive, localized marketing copy in Spanish, French, German, Japanese, and more.
-- **Authentication & Protected Dashboards:** Secure email/password signup and login powered by bcrypt password hashing and encrypted HTTP-only session tokens.
-- **Personal Translation History:** Automatically saves translations for logged-in users with real-time keyword search, language filtering, and single/bulk deletion.
-- **Usage Quotas & Rate Limiting:** Server-side tracking of monthly character usage (Free Starter: 5,000 characters; Pro Creator: 100,000 characters).
-- **Payment Gateway Architecture:** Dual-gateway integration design supporting **Razorpay** (India UPI/Netbanking/Cards) and **Stripe** (International multi-currency). Features idempotent webhook processing to prevent double-crediting.
-- **Instant Demo Mode:** One-click simulation to switch between Free and Pro tiers without live credit card charges.
+### 2. Full-Stack SaaS Architecture & Productivity Tools
+- 📦 **Multilingual Product Description Assistant:** Converts product names and bullet points into high-converting e-commerce listings tailored by tone (Professional, Creative, Technical, Persuasive).
+- 🔐 **Authentication & Session Security:** Complete sign-up, sign-in, and password reset flows with bcrypt password hashing and tamper-proof HTTP-only JWT sessions.
+- 📜 **Personal Translation History:** Automatically archives translations for authenticated users with search, pagination, single-item deletion, and bulk purging.
+- 📈 **Quota & Usage Limiting:** Real-time monthly character quota tracking (Free Starter: 5,000 chars; Pro Creator: 100,000 chars).
+- 💳 **Payment Gateway Architecture:** Dual-gateway design supporting **Razorpay** (India UPI/Cards) and **Stripe** (International currencies) with idempotent webhook processing.
+- 🌓 **Zero-FOUC Dark / Light Theme:** Custom theme switcher with persistent preferences stored in `localStorage` and system preference detection.
 
 ---
 
@@ -28,37 +73,36 @@ An industry-ready, production-oriented Language Translation, Localization, and S
 
 | Layer | Technology | Purpose |
 | :--- | :--- | :--- |
-| **Frontend** | **Next.js 14+ (App Router)** | Full-stack React framework with SSR and responsive UI |
-| **Language** | **TypeScript** | Strict compile-time typing and bug prevention |
-| **Styling** | **Tailwind CSS** | Accessible, responsive, modern SaaS design system |
-| **Icons** | **Lucide React** | High-performance, lightweight UI iconography |
-| **Database & ORM** | **Prisma ORM + SQLite / PostgreSQL** | Relational data persistence with migrations |
-| **Validation** | **Zod** | End-to-end schema validation for API payloads |
-| **Authentication** | **bcryptjs + Jose JWT** | Secure password hashing and tamper-proof session cookies |
-| **Audio** | **Web Speech API** | Client-side native text-to-speech synthesis |
+| **Frontend Framework** | **Next.js 14+ (App Router)** | Server Components, Route Handlers, fast SSR & client hydration |
+| **Language** | **TypeScript 5.6** | Complete type safety, zero compile errors (`tsc --noEmit`) |
+| **Styling & UI** | **Tailwind CSS 3.4** | Modern, responsive dark/light mode SaaS design system |
+| **Icons** | **Lucide React** | Feather-light SVG icons |
+| **Database & ORM** | **Prisma ORM + SQLite** | Relational schema modeling with zero-config local storage (Postgres-ready) |
+| **API Validation** | **Zod** | Strict schema validation on all incoming API request payloads |
+| **Auth & Security** | **bcryptjs + Jose JWT** | Secure password hashing & Edge-compatible tamper-proof JWT cookies |
+| **Voice & Audio** | **Web Speech API** | Client-side native speech recognition & text-to-speech synthesis |
 
 ---
 
 ## 🚀 Quick Start (Local Setup)
 
 ### 1. Prerequisites
-- **Node.js**: v18.0.0 or higher (Installed locally at `AppData\Local\Programs\nodejs`)
+- **Node.js**: v18.0.0 or higher
 - **Git**
 
-### 2. Installation
-Clone the repository and install dependencies:
+### 2. Clone the Repository
 ```bash
-git clone <repository-url>
-cd "task 1"
+git clone https://github.com/rupampatle25/CODE_ALPHA-TASK1.git
+cd CODE_ALPHA-TASK1
 npm install
 ```
 
-### 3. Environment Variables
-Copy the template environment file:
+### 3. Configure Environment Variables
+Copy the example environment template:
 ```bash
 cp .env.example .env
 ```
-Default configuration values in `.env`:
+Default `.env` configuration:
 ```ini
 DATABASE_URL="file:./dev.db"
 JWT_SECRET="lingoflow-local-dev-secret-key-at-least-32-chars-long!"
@@ -66,43 +110,45 @@ NEXT_PUBLIC_APP_URL="http://localhost:3000"
 TRANSLATION_PROVIDER="mymemory"
 ```
 
-### 4. Database Initialization & Seeding
-Initialize the SQLite database and seed the default plans & demo account:
+### 4. Initialize Database & Seed Demo Data
 ```bash
 npx prisma db push
 node prisma/seed.js
 ```
 
-### 5. Start the Development Server
+### 5. Launch Development Server
 ```bash
 npm run dev
 ```
-Open [http://localhost:3000](http://localhost:3000) in your web browser.
+Open **[http://localhost:3000](http://localhost:3000)** in your browser.
 
 ---
 
-## 🧪 Running Automated Tests
+## 🧪 Automated Testing Suite
 
-Run the comprehensive test suite verifying password hashing, database models, live translation, and webhook idempotency:
+Verify the entire system end-to-end (database, bcrypt hashing, live translation engine, and webhook idempotency):
+
 ```bash
 npm test
 ```
 
-Expected output:
+### Expected Output:
 ```text
 ==================================================
       LingoFlow AI - Automated Test Suite         
 ==================================================
 
 1. Testing bcrypt password hashing and verification... ✅ PASSED
-2. Testing Database Plan querying (Free & Pro)... ✅ PASSED
-3. Testing Live Translation Engine (en -> es)... ✅ PASSED
-4. Testing Multilingual Translations (en -> fr, de)... ✅ PASSED
-5. Testing Webhook Idempotency Event Model... ✅ PASSED
-6. Testing Demo User credentials readiness... ✅ PASSED
+2. Testing Database Plan querying (Free & Pro)... ✅ PASSED (2 plans loaded)
+3. Testing Live Translation Engine (en -> es)... ✅ PASSED -> "Buenos días, bienvenidos a nuestra aplicación."
+4. Testing Multilingual Translations (en -> fr, de)... ✅ PASSED (FR: Merci beaucoup,, DE: vielen dank)
+5. Testing Webhook Idempotency Event Model... ✅ PASSED: Idempotency uniqueness verified
+6. Testing Demo User credentials readiness... ✅ PASSED: Demo account verified (demo@lingoflow.ai / password123)
+7. Testing Translation History CRUD, Pagination & Access Control... ✅ PASSED: CRUD, row-level isolation & deletion verified
+8. Testing Session Security & Password Reset Logic... ✅ PASSED: Token verification, tamper resistance & password reset verified
 
 ==================================================
-Summary: 6 Passed, 0 Failed
+Summary: 8 Passed, 0 Failed
 ==================================================
 ```
 
@@ -110,57 +156,72 @@ Summary: 6 Passed, 0 Failed
 
 ## 🔑 Pre-Seeded Demo Account
 
-For rapid demonstration during college presentations or testing:
+Use these credentials for immediate testing or presentations:
 - **Email:** `demo@lingoflow.ai`
 - **Password:** `password123`
 - **Dashboard URL:** `http://localhost:3000/dashboard`
 
 ---
 
-## 📁 Directory Structure
+## 📁 Project Architecture & Directory Structure
 
 ```text
-lingoflow-ai/
+CODE_ALPHA-TASK1/
+├── docs/
+│   └── screenshots/              # High-resolution screenshots of each view
+│       ├── workspace_hero.png    # Live Translation Studio
+│       ├── dashboard.png         # User Dashboard
+│       ├── history.png           # Translation History
+│       ├── business_assistant.png# E-commerce Assistant
+│       └── login.png             # Authentication
 ├── prisma/
-│   ├── schema.prisma             # Relational database schema
-│   └── seed.js                   # Seed script for plans and demo user
+│   ├── schema.prisma             # Relational schema (User, Plan, History, WebhookEvent)
+│   └── seed.js                   # Database seeder for plans & demo user
 ├── scripts/
-│   ├── run-all-tests.js          # Automated end-to-end verification suite
-│   └── test-translate.js         # Translation engine test
+│   └── run-all-tests.js          # 8-suite automated end-to-end verification
 ├── src/
 │   ├── app/
-│   │   ├── (auth)/login & signup # Authentication pages
-│   │   ├── dashboard/            # Authenticated workspace, history, business assistant, billing, settings
+│   │   ├── (auth)/               # Login, Sign-up, Forgot Password
+│   │   ├── dashboard/            # Authenticated Translation Studio, History, Assistant, Billing
+│   │   ├── landing/              # Marketing & Live Interactive Workspace Showcase
 │   │   ├── api/
-│   │   │   ├── auth/             # Login, signup, logout, session
+│   │   │   ├── auth/             # Login, Signup, Logout, Reset-Password, Me
 │   │   │   ├── translate/        # Core translation API route
-│   │   │   ├── history/          # History CRUD route
-│   │   │   ├── business/         # Product description generator route
-│   │   │   ├── billing/          # Checkout session route
-│   │   │   ├── webhooks/         # Idempotent payment webhook
-│   │   │   └── health/           # System healthcheck route
-│   │   ├── globals.css           # Tailwind base styles
-│   │   ├── layout.tsx            # Global layout
-│   │   └── page.tsx              # Public SaaS landing page
+│   │   │   ├── history/          # History CRUD with search & pagination
+│   │   │   ├── business/         # Product description generator
+│   │   │   ├── billing/          # Checkout session simulator
+│   │   │   ├── webhooks/         # Idempotent payment webhook handler
+│   │   │   └── health/           # System status endpoint
+│   │   ├── globals.css           # Tailwind custom base & dark mode styles
+│   │   ├── layout.tsx            # Root layout with zero-FOUC theme script
+│   │   └── page.tsx              # Root router directing auth flows
 │   ├── components/
 │   │   ├── landing/              # Navbar, Footer
-│   │   └── workspace/            # LanguageSelector, TranslationWorkspace
+│   │   ├── theme/                # ThemeProvider & ThemeToggle
+│   │   └── workspace/            # TranslationWorkspace & LanguageSelector
 │   ├── lib/
-│   │   ├── auth.ts               # Session token & password hashing
-│   │   ├── db.ts                 # Prisma client instance
-│   │   ├── env.ts                # Zod environment validation
-│   │   └── utils.ts              # Helper functions
+│   │   ├── auth.ts               # Session token generation & password verification
+│   │   ├── session.ts            # Edge-compatible jose JWT session verifier
+│   │   ├── db.ts                 # Prisma Client singleton
+│   │   └── utils.ts              # Helper utilities
+│   ├── middleware.ts             # Route protection & auth redirection
 │   └── services/
 │       ├── translation/          # Provider abstraction (MyMemory, Google Cloud, Mock)
-│       └── usage/                # Monthly character quota tracker
-├── ARCHITECTURE.md               # Deep-dive system architecture
-├── SECURITY.md                   # Security standards & vulnerability disclosure
-├── CONTRIBUTING.md               # Development guide
+│       └── usage/                # Character quota tracking
+├── ARCHITECTURE.md               # Detailed system design specification
+├── SECURITY.md                   # Security guidelines & reporting
+├── CONTRIBUTING.md               # Contribution workflow
 └── LICENSE                       # MIT License
 ```
 
 ---
 
-## 🛡️ License
+## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](file:///c:/Users/l/OneDrive/Desktop/task%201/LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+### 👨‍💻 Author
+Developed for the **CodeAlpha Full-Stack Web Development Internship**.
+Repository: [https://github.com/rupampatle25/CODE_ALPHA-TASK1](https://github.com/rupampatle25/CODE_ALPHA-TASK1)

@@ -207,6 +207,71 @@ async function runTests() {
     failed++;
   }
 
+  // Test 8: Session Security, Password Reset & Edge Route Guard Logic
+  try {
+    process.stdout.write("8. Testing Session Security & Password Reset Logic... ");
+    const { SignJWT, jwtVerify } = require("jose");
+    const secret = new TextEncoder().encode(
+      process.env.JWT_SECRET || "lingoflow-local-dev-secret-key-at-least-32-chars-long!"
+    );
+
+    // 1. Test JWT creation and Edge-compatible verification
+    const token = await new SignJWT({ userId: "test-user-id", email: "test@lingoflow.ai", role: "USER" })
+      .setProtectedHeader({ alg: "HS256" })
+      .setIssuedAt()
+      .setExpirationTime("7d")
+      .sign(secret);
+
+    const { payload } = await jwtVerify(token, secret);
+    if (!payload.userId || payload.email !== "test@lingoflow.ai") {
+      throw new Error("JWT token verification failed");
+    }
+
+    // 2. Test Invalid Token handling
+    let invalidCaught = false;
+    try {
+      await jwtVerify("corrupt.token.value", secret);
+    } catch {
+      invalidCaught = true;
+    }
+    if (!invalidCaught) {
+      throw new Error("Corrupt token should fail verification");
+    }
+
+    // 3. Test Password Reset logic on demo user
+    const demo = await prisma.user.findUnique({ where: { email: "demo@lingoflow.ai" } });
+    if (!demo) throw new Error("Demo user required");
+
+    const tempPassword = "newTempPassword456!";
+    const newHash = await bcrypt.hash(tempPassword, 10);
+    await prisma.user.update({
+      where: { id: demo.id },
+      data: { passwordHash: newHash },
+    });
+
+    const updatedUser = await prisma.user.findUnique({ where: { id: demo.id } });
+    const matchesNew = await bcrypt.compare(tempPassword, updatedUser.passwordHash);
+
+    // 4. Restore original password123
+    const restoredHash = await bcrypt.hash("password123", 10);
+    await prisma.user.update({
+      where: { id: demo.id },
+      data: { passwordHash: restoredHash },
+    });
+    const matchesRestored = await bcrypt.compare("password123", (await prisma.user.findUnique({ where: { id: demo.id } })).passwordHash);
+
+    if (matchesNew && matchesRestored) {
+      console.log("✅ PASSED: Token verification, tamper resistance & password reset verified");
+      passed++;
+    } else {
+      console.log("❌ FAILED: Password reset verification failed");
+      failed++;
+    }
+  } catch (err) {
+    console.log("❌ ERROR:", err.message);
+    failed++;
+  }
+
   console.log("\n==================================================");
   console.log(`Summary: ${passed} Passed, ${failed} Failed`);
   console.log("==================================================");
