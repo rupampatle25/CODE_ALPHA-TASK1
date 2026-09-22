@@ -7,6 +7,7 @@ import {
   Copy,
   Check,
   Volume2,
+  Square,
   Calendar,
   Languages,
   Loader2,
@@ -31,7 +32,7 @@ export default function HistoryPage() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [copiedId, setCopiedId] = useState<string | null>(null);
-  const [speakingId, setSpeakingId] = useState<string | null>(null);
+  const [speakingKey, setSpeakingKey] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const fetchHistory = async () => {
@@ -53,6 +54,11 @@ export default function HistoryPage() {
 
   useEffect(() => {
     fetchHistory();
+    return () => {
+      if (typeof window !== "undefined" && window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
+    };
   }, []);
 
   const handleDelete = async (id: string) => {
@@ -87,14 +93,23 @@ export default function HistoryPage() {
     setTimeout(() => setCopiedId(null), 2000);
   };
 
-  const handleSpeak = (id: string, text: string, langCode: string) => {
-    if (!window.speechSynthesis) return;
+  const handleToggleSpeak = (key: string, text: string, langCode: string) => {
+    if (typeof window === "undefined" || !window.speechSynthesis) return;
+
+    if (speakingKey === key) {
+      window.speechSynthesis.cancel();
+      setSpeakingKey(null);
+      return;
+    }
+
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = langCode;
-    setSpeakingId(id);
-    utterance.onend = () => setSpeakingId(null);
-    utterance.onerror = () => setSpeakingId(null);
+
+    setSpeakingKey(key);
+    utterance.onend = () => setSpeakingKey(null);
+    utterance.onerror = () => setSpeakingKey(null);
+
     window.speechSynthesis.speak(utterance);
   };
 
@@ -113,7 +128,7 @@ export default function HistoryPage() {
         <div>
           <h2 className="text-2xl font-bold text-slate-900">Translation History</h2>
           <p className="text-sm text-slate-500 mt-1">
-            Search, replay, and manage your past translation records.
+            Search, replay audio pronunciation, and manage your past translation records.
           </p>
         </div>
 
@@ -175,86 +190,114 @@ export default function HistoryPage() {
         </div>
       ) : (
         <div className="space-y-4">
-          {filteredHistory.map((item) => (
-            <div
-              key={item.id}
-              className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:border-slate-300 transition-all space-y-4"
-            >
-              {/* Header meta */}
-              <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500 border-b border-slate-100 pb-3">
-                <div className="flex items-center gap-2">
-                  <span className="font-semibold text-slate-700 bg-slate-100 px-2 py-0.5 rounded">
-                    {getLanguageName(item.sourceLang)} → {getLanguageName(item.targetLang)}
-                  </span>
-                  <span className="text-slate-400">•</span>
-                  <span>{item.charCount} chars</span>
-                  <span className="text-slate-400">•</span>
-                  <span className="text-blue-600">{item.provider}</span>
-                </div>
+          {filteredHistory.map((item) => {
+            const sourceKey = `${item.id}-source`;
+            const targetKey = `${item.id}-target`;
 
-                <div className="flex items-center gap-3">
-                  <div className="flex items-center gap-1 text-slate-400">
-                    <Calendar className="w-3.5 h-3.5" />
-                    <span>{formatDate(item.createdAt)}</span>
+            return (
+              <div
+                key={item.id}
+                className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:border-slate-300 transition-all space-y-4"
+              >
+                {/* Header meta */}
+                <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500 border-b border-slate-100 pb-3">
+                  <div className="flex items-center gap-2">
+                    <span className="font-semibold text-slate-700 bg-slate-100 px-2 py-0.5 rounded">
+                      {getLanguageName(item.sourceLang)} → {getLanguageName(item.targetLang)}
+                    </span>
+                    <span className="text-slate-400">•</span>
+                    <span>{item.charCount} chars</span>
+                    <span className="text-slate-400">•</span>
+                    <span className="text-blue-600">{item.provider}</span>
                   </div>
-                  <button
-                    onClick={() => handleDelete(item.id)}
-                    title="Delete record"
-                    className="p-1 rounded text-slate-400 hover:text-red-500 hover:bg-red-50 transition-colors"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
 
-              {/* Text content comparison */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Source text */}
-                <div className="bg-slate-50 p-3 rounded-xl">
-                  <div className="text-[11px] font-semibold text-slate-400 uppercase mb-1">
-                    Original ({item.sourceLang.toUpperCase()})
-                  </div>
-                  <p className="text-sm text-slate-800 whitespace-pre-wrap">{item.sourceText}</p>
-                </div>
-
-                {/* Translated text */}
-                <div className="bg-blue-50/50 p-3 rounded-xl relative group">
-                  <div className="flex justify-between items-center mb-1">
-                    <div className="text-[11px] font-semibold text-blue-600 uppercase">
-                      Translated ({item.targetLang.toUpperCase()})
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-1 text-slate-400">
+                      <Calendar className="w-3.5 h-3.5" />
+                      <span>{formatDate(item.createdAt)}</span>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <button
-                        onClick={() => handleSpeak(item.id, item.translatedText, item.targetLang)}
-                        title="Listen"
-                        className="p-1 rounded text-slate-400 hover:text-blue-600 transition-colors"
-                      >
-                        <Volume2
-                          className={`w-3.5 h-3.5 ${
-                            speakingId === item.id ? "text-blue-600 animate-pulse" : ""
+                    <button
+                      onClick={() => handleDelete(item.id)}
+                      title="Delete record"
+                      className="p-1 rounded text-slate-400 hover:text-red-500 hover:bg-red-50 transition-colors"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Text content comparison */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Source text */}
+                  <div className="bg-slate-50 p-3 rounded-xl relative group">
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-[11px] font-semibold text-slate-400 uppercase">
+                        Original ({item.sourceLang.toUpperCase()})
+                      </span>
+                      <div className="flex items-center gap-1">
+                        <button
+                          onClick={() => handleToggleSpeak(sourceKey, item.sourceText, item.sourceLang)}
+                          title={speakingKey === sourceKey ? "Stop audio" : "Listen to original pronunciation"}
+                          className={`p-1 rounded transition-colors ${
+                            speakingKey === sourceKey
+                              ? "text-red-600 animate-pulse bg-red-50"
+                              : "text-slate-400 hover:text-blue-600"
                           }`}
-                        />
-                      </button>
-                      <button
-                        onClick={() => handleCopy(item.id, item.translatedText)}
-                        title="Copy"
-                        className="p-1 rounded text-slate-400 hover:text-blue-600 transition-colors"
-                      >
-                        {copiedId === item.id ? (
-                          <Check className="w-3.5 h-3.5 text-emerald-600" />
-                        ) : (
-                          <Copy className="w-3.5 h-3.5" />
-                        )}
-                      </button>
+                        >
+                          {speakingKey === sourceKey ? (
+                            <Square className="w-3.5 h-3.5 fill-current text-red-600" />
+                          ) : (
+                            <Volume2 className="w-3.5 h-3.5" />
+                          )}
+                        </button>
+                      </div>
                     </div>
+                    <p className="text-sm text-slate-800 whitespace-pre-wrap">{item.sourceText}</p>
                   </div>
-                  <p className="text-sm text-slate-900 font-medium whitespace-pre-wrap">
-                    {item.translatedText}
-                  </p>
+
+                  {/* Translated text */}
+                  <div className="bg-blue-50/50 p-3 rounded-xl relative group">
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-[11px] font-semibold text-blue-600 uppercase">
+                        Translated ({item.targetLang.toUpperCase()})
+                      </span>
+                      <div className="flex items-center gap-1">
+                        <button
+                          onClick={() => handleToggleSpeak(targetKey, item.translatedText, item.targetLang)}
+                          title={speakingKey === targetKey ? "Stop audio" : "Listen to translated audio"}
+                          className={`p-1 rounded transition-colors ${
+                            speakingKey === targetKey
+                              ? "text-red-600 animate-pulse bg-red-50"
+                              : "text-slate-400 hover:text-blue-600"
+                          }`}
+                        >
+                          {speakingKey === targetKey ? (
+                            <Square className="w-3.5 h-3.5 fill-current text-red-600" />
+                          ) : (
+                            <Volume2 className="w-3.5 h-3.5" />
+                          )}
+                        </button>
+                        <button
+                          onClick={() => handleCopy(item.id, item.translatedText)}
+                          title="Copy"
+                          className="p-1 rounded text-slate-400 hover:text-blue-600 transition-colors"
+                        >
+                          {copiedId === item.id ? (
+                            <Check className="w-3.5 h-3.5 text-emerald-600" />
+                          ) : (
+                            <Copy className="w-3.5 h-3.5" />
+                          )}
+                        </button>
+                      </div>
+                    </div>
+                    <p className="text-sm text-slate-900 font-medium whitespace-pre-wrap">
+                      {item.translatedText}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>
