@@ -62,13 +62,6 @@ function LoginForm() {
         </div>
       )}
 
-      {/* Quick Demo Credentials Box */}
-      <div className="mb-6 p-3 bg-blue-50/60 dark:bg-blue-950/40 border border-blue-200/80 dark:border-blue-800 rounded-xl text-xs text-blue-800 dark:text-blue-300">
-        <span className="font-bold">Demo Account:</span>{" "}
-        <code className="bg-white/80 dark:bg-slate-800 px-1.5 py-0.5 rounded border border-blue-200 dark:border-blue-800">demo@lingoflow.ai</code> /{" "}
-        <code className="bg-white/80 dark:bg-slate-800 px-1.5 py-0.5 rounded border border-blue-200 dark:border-blue-800">password123</code>
-      </div>
-
       <form className="space-y-5" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-300">
