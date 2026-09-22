@@ -13,10 +13,10 @@ export const Footer: React.FC = () => {
               <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
                 <Globe className="w-4 h-4" />
               </div>
-              <span className="text-lg font-bold">LingoFlow AI</span>
+              <span className="text-lg font-bold">BhashaSetu</span>
             </div>
             <p className="text-sm text-slate-400 leading-relaxed">
-              AI-driven translation, localization, and language productivity SaaS platform.
+              Connecting Languages, Empowering Communication.
             </p>
             <div className="flex items-center gap-2 text-xs text-slate-500">
               <Shield className="w-4 h-4 text-emerald-400" />
@@ -60,7 +60,7 @@ export const Footer: React.FC = () => {
 
         <div className="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
           <div>
-            © {new Date().getFullYear()} LingoFlow AI. Built with precision for production and academic demonstration.
+            © {new Date().getFullYear()} BhashaSetu. Built with precision for production and academic demonstration.
           </div>
           <div className="flex items-center gap-1">
             <span>Crafted with modern Next.js, TypeScript & Tailwind</span>

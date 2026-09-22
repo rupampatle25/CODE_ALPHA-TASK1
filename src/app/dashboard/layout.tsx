@@ -39,7 +39,7 @@ export default async function DashboardLayout({
               <Globe className="w-4 h-4" />
             </div>
             <Link href="/dashboard" className="text-lg font-bold text-white tracking-tight">
-              LingoFlow<span className="text-blue-500">.ai</span>
+              Bhasha<span className="text-blue-500">Setu</span>
             </Link>
           </div>
 
@@ -123,7 +123,7 @@ export default async function DashboardLayout({
         {/* Top Header */}
         <header className="h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-6 flex items-center justify-between transition-colors">
           <div className="flex items-center gap-2">
-            <h1 className="text-base font-bold text-slate-800 dark:text-slate-100">LingoFlow Dashboard</h1>
+            <h1 className="text-base font-bold text-slate-800 dark:text-slate-100">BhashaSetu Dashboard</h1>
           </div>
           <div className="flex items-center gap-3">
             <Link

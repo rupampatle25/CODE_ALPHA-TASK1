@@ -76,7 +76,7 @@ export default function ForgotPasswordPage() {
             <Globe className="w-5 h-5" />
           </div>
           <span className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
-            LingoFlow<span className="text-blue-600 dark:text-blue-400">.ai</span>
+            Bhasha<span className="text-blue-600 dark:text-blue-400">Setu</span>
           </span>
         </Link>
         <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white">

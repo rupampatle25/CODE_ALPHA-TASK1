@@ -86,7 +86,7 @@ export async function adaptTextTone(
     adaptedText: adapted.text,
     tone,
     targetLang,
-    provider: "LingoFlow Neural Tone Engine",
+    provider: "BhashaSetu Neural Tone Engine",
     explanation: adapted.explanation,
     charCount: adapted.text.length,
   };

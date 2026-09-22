@@ -259,7 +259,7 @@ export const TranslationWorkspace: React.FC = () => {
     const element = document.createElement("a");
     const file = new Blob([translatedText], { type: "text/plain;charset=utf-8" });
     element.href = URL.createObjectURL(file);
-    element.download = `lingoflow_direct_${targetLang}.txt`;
+    element.download = `bhashasetu_direct_${targetLang}.txt`;
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
@@ -271,7 +271,7 @@ export const TranslationWorkspace: React.FC = () => {
     const element = document.createElement("a");
     const file = new Blob([adaptedText], { type: "text/plain;charset=utf-8" });
     element.href = URL.createObjectURL(file);
-    element.download = `lingoflow_adapted_${selectedTone}_${targetLang}.txt`;
+    element.download = `bhashasetu_adapted_${selectedTone}_${targetLang}.txt`;
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);

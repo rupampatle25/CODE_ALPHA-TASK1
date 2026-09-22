@@ -19,7 +19,7 @@ export const Navbar: React.FC = () => {
             </div>
             <div>
               <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">
-                LingoFlow<span className="text-blue-600 dark:text-blue-400">.ai</span>
+                Bhasha<span className="text-blue-600 dark:text-blue-400">Setu</span>
               </span>
             </div>
           </Link>

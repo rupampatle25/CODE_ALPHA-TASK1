@@ -2,7 +2,7 @@
 
 **Last Updated:** September 2026
 
-*Note: This is a practical, transparency-oriented policy draft designed for LingoFlow AI. It should be reviewed by legal counsel before commercial deployment.*
+*Note: This is a practical, transparency-oriented policy draft designed for BhashaSetu. It should be reviewed by legal counsel before commercial deployment.*
 
 ## 1. Information We Collect
 - **Account Data:** When you create an account, we collect your name, email address, and encrypted password hash.

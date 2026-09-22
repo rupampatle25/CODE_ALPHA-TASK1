@@ -199,7 +199,7 @@ export default function BillingPage() {
         </div>
 
         <p className="text-sm text-slate-600 leading-relaxed">
-          LingoFlow AI is designed with a dual-gateway architecture:
+          BhashaSetu is designed with a dual-gateway architecture:
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-600">

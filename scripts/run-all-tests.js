@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 async function runTests() {
   console.log("==================================================");
-  console.log("      LingoFlow AI - Automated Test Suite         ");
+  console.log("        BhashaSetu - Automated Test Suite        ");
   console.log("==================================================\n");
 
   let passed = 0;
@@ -212,18 +212,18 @@ async function runTests() {
     process.stdout.write("8. Testing Session Security & Password Reset Logic... ");
     const { SignJWT, jwtVerify } = require("jose");
     const secret = new TextEncoder().encode(
-      process.env.JWT_SECRET || "lingoflow-local-dev-secret-key-at-least-32-chars-long!"
+      process.env.JWT_SECRET || "bhashasetu-local-dev-secret-key-at-least-32-chars-long!"
     );
 
     // 1. Test JWT creation and Edge-compatible verification
-    const token = await new SignJWT({ userId: "test-user-id", email: "test@lingoflow.ai", role: "USER" })
+    const token = await new SignJWT({ userId: "test-user-id", email: "test@bhashasetu.ai", role: "USER" })
       .setProtectedHeader({ alg: "HS256" })
       .setIssuedAt()
       .setExpirationTime("7d")
       .sign(secret);
 
     const { payload } = await jwtVerify(token, secret);
-    if (!payload.userId || payload.email !== "test@lingoflow.ai") {
+    if (!payload.userId || payload.email !== "test@bhashasetu.ai") {
       throw new Error("JWT token verification failed");
     }
 

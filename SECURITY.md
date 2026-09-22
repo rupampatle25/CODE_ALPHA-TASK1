@@ -1,8 +1,8 @@
-# Security Policy: LingoFlow AI
+# Security Policy: BhashaSetu
 
 ## 1. Security Overview
 
-LingoFlow AI adheres to industry-standard security practices for SaaS applications:
+BhashaSetu adheres to industry-standard security practices for SaaS applications:
 
 - **Authentication & Password Storage:** Passwords are never stored in plaintext. They are salted and hashed using **bcrypt** (10 salt rounds).
 - **Session Tokens:** Sessions are cryptographically signed with **HMAC-SHA256** using the `jose` library and dispatched exclusively in `httpOnly`, `SameSite=Lax` cookies.
@@ -23,6 +23,6 @@ LingoFlow AI adheres to industry-standard security practices for SaaS applicatio
 ## 3. Reporting a Vulnerability
 
 If you discover a potential security vulnerability within this project, please report it privately:
-- **Email:** `security@lingoflow.ai`
+- **Email:** `security@bhashasetu.ai`
 
 Please allow up to 48 hours for an acknowledgment and coordinate responsible disclosure.

@@ -12,7 +12,7 @@ interface ThemeContextType {
   toggleTheme: () => void;
 }
 
-const STORAGE_KEY = "lingoflow-theme";
+const STORAGE_KEY = "bhashasetu-theme";
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
@@ -29,7 +29,10 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   // Initialize theme from localStorage or system on client mount
   useEffect(() => {
     try {
-      const storedTheme = (localStorage.getItem(STORAGE_KEY) as Theme) || "system";
+      const storedTheme =
+        (localStorage.getItem(STORAGE_KEY) as Theme) ||
+        (localStorage.getItem("lingoflow-theme") as Theme) ||
+        "system";
       setThemeState(storedTheme);
       const initialResolved = storedTheme === "system" ? getSystemTheme() : storedTheme;
       setResolvedTheme(initialResolved);

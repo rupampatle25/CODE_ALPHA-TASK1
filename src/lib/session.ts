@@ -1,9 +1,9 @@
 import { jwtVerify } from "jose";
 
-export const SESSION_COOKIE_NAME = "lingoflow_session";
+export const SESSION_COOKIE_NAME = "bhashasetu_session";
 
 export const JWT_SECRET = new TextEncoder().encode(
-  process.env.JWT_SECRET || "lingoflow-local-dev-secret-key-at-least-32-chars-long!"
+  process.env.JWT_SECRET || "bhashasetu-local-dev-secret-key-at-least-32-chars-long!"
 );
 
 export interface SessionPayload {

@@ -57,7 +57,7 @@ export default async function SettingsPage() {
         </h3>
 
         <p className="text-sm text-slate-600 leading-relaxed">
-          At LingoFlow AI, we practice strict data minimization:
+          At BhashaSetu, we practice strict data minimization:
         </p>
 
         <ul className="space-y-2 text-xs text-slate-600 list-disc list-inside bg-slate-50 p-4 rounded-xl">
@@ -81,7 +81,7 @@ export default async function SettingsPage() {
         <button
           type="button"
           onClick={() => {
-            alert("To delete your account in this deployment, clear your history or contact support@lingoflow.ai.");
+            alert("To delete your account in this deployment, clear your history or contact support@bhashasetu.ai.");
           }}
           className="px-4 py-2 bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 rounded-xl text-xs font-bold transition-colors"
         >

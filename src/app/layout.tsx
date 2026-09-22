@@ -3,15 +3,15 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 
 export const metadata: Metadata = {
-  title: "LingoFlow AI — Break Language Barriers. Grow Without Borders.",
-  description: "Industry-ready AI translation, localization, and language productivity SaaS platform.",
-  keywords: ["AI Translation", "Localization", "Multi-language", "Language SaaS", "LingoFlow"],
+  title: "BhashaSetu — Connecting Languages, Empowering Communication.",
+  description: "Industry-ready AI language translation, localization, and tone adaptation SaaS platform. Connecting Languages, Empowering Communication.",
+  keywords: ["BhashaSetu", "AI Translation", "Language Bridge", "Multilingual", "Localization", "Tone Adaptation"],
 };
 
 const themeScript = `
   (function() {
     try {
-      var storedTheme = localStorage.getItem('lingoflow-theme');
+      var storedTheme = localStorage.getItem('bhashasetu-theme') || localStorage.getItem('lingoflow-theme');
       var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       if (storedTheme === 'dark' || (!storedTheme && systemDark) || (storedTheme === 'system' && systemDark)) {
         document.documentElement.classList.add('dark');

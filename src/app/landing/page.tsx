@@ -33,9 +33,9 @@ export default function LandingPage() {
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-950 dark:text-white tracking-tight leading-tight mb-6">
-              Break Language Barriers. <br className="hidden sm:inline" />
+              Connecting Languages. <br className="hidden sm:inline" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">
-                Grow Without Borders.
+                Empowering Communication.
               </span>
             </h1>
 
@@ -170,7 +170,7 @@ export default function LandingPage() {
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 mb-2">Built For You</h2>
             <h3 className="text-3xl font-extrabold text-slate-900 dark:text-white sm:text-4xl">
-              Who Uses LingoFlow AI?
+              Who Uses BhashaSetu?
             </h3>
           </div>
 
@@ -314,9 +314,9 @@ export default function LandingPage() {
 
           <div className="space-y-6">
             <div className="p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
-              <h4 className="font-semibold text-slate-900 dark:text-white mb-2">How does LingoFlow AI perform translations?</h4>
+              <h4 className="font-semibold text-slate-900 dark:text-white mb-2">How does BhashaSetu perform translations?</h4>
               <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                LingoFlow AI connects to production-grade neural translation APIs server-side. Your API keys are strictly secured in environment variables and never exposed to client browsers.
+                BhashaSetu connects to production-grade neural translation APIs server-side. Your API keys are strictly secured in environment variables and never exposed to client browsers.
               </p>
             </div>
 

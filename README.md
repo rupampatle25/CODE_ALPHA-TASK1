@@ -1,5 +1,5 @@
-# CodeAlpha Task 1: Language Translation Tool 🌐
-### *LingoFlow AI — "Break Language Barriers. Grow Without Borders."*
+# BhashaSetu — Language Translation Tool 🌐
+### *"Connecting Languages, Empowering Communication."*
 
 [![Next.js](https://img.shields.io/badge/Next.js-14.2.15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
@@ -8,23 +8,23 @@
 [![SQLite](https://img.shields.io/badge/SQLite-Zero_Config-003B57?style=for-the-badge&logo=sqlite)](https://www.sqlite.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
 
-An industry-ready, production-grade **Language Translation, Localization, and SaaS Productivity Platform** built from scratch for the **CodeAlpha Full-Stack Web Development Internship (Task 1)**.
+**BhashaSetu** is an industry-ready, production-grade **Language Translation, Localization, and SaaS Productivity Platform** built from scratch for the **CodeAlpha Full-Stack Web Development Internship (Task 1)**.
 
 ---
 
 ## 📸 Screenshots Showcase
 
 ### 1. Interactive Translation Studio (CodeAlpha Task 1 Workspace)
-*Live translation across 30+ languages, auto-detection, Speech-to-Text input, Text-to-Speech playback, one-click copy, and export.*
+*Live translation across 30+ languages, auto-detection, Speech-to-Text input, Text-to-Speech playback, AI Tone Selection, one-click copy, and export.*
 
-![LingoFlow AI Translation Workspace](docs/screenshots/workspace_hero.png)
+![BhashaSetu Translation Workspace](docs/screenshots/workspace_hero.png)
 
 ---
 
 ### 2. User Dashboard & Translation Studio
 *Authenticated user dashboard featuring monthly quota tracking, quick actions, and private workspace.*
 
-![LingoFlow AI Dashboard](docs/screenshots/dashboard.png)
+![BhashaSetu Dashboard](docs/screenshots/dashboard.png)
 
 ---
 
@@ -135,7 +135,7 @@ npm test
 ### Expected Output:
 ```text
 ==================================================
-      LingoFlow AI - Automated Test Suite         
+        BhashaSetu - Automated Test Suite        
 ==================================================
 
 1. Testing bcrypt password hashing and verification... ✅ PASSED
@@ -146,9 +146,10 @@ npm test
 6. Testing Demo User credentials readiness... ✅ PASSED: Demo account verified (demo@lingoflow.ai / password123)
 7. Testing Translation History CRUD, Pagination & Access Control... ✅ PASSED: CRUD, row-level isolation & deletion verified
 8. Testing Session Security & Password Reset Logic... ✅ PASSED: Token verification, tamper resistance & password reset verified
+9. Testing AI Tone Selection & Adaptation Engine (Formal, Casual, Professional, Simple)... ✅ PASSED: All 4 tones validated with input safeguards
 
 ==================================================
-Summary: 8 Passed, 0 Failed
+Summary: 9 Passed, 0 Failed
 ==================================================
 ```
 

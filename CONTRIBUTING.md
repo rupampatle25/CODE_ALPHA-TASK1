@@ -1,6 +1,6 @@
-# Contributing to LingoFlow AI
+# Contributing to BhashaSetu
 
-Thank you for your interest in contributing to LingoFlow AI!
+Thank you for your interest in contributing to BhashaSetu!
 
 ## Development Workflow
 

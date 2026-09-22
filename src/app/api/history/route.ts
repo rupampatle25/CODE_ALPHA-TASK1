@@ -67,7 +67,7 @@ export async function GET(req: NextRequest) {
       return new NextResponse(jsonString, {
         headers: {
           "Content-Type": "application/json",
-          "Content-Disposition": `attachment; filename="lingoflow_history_${new Date().toISOString().slice(0, 10)}.json"`,
+          "Content-Disposition": `attachment; filename="bhashasetu_history_${new Date().toISOString().slice(0, 10)}.json"`,
         },
       });
     }

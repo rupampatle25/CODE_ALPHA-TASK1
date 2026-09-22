@@ -1,8 +1,8 @@
-# System Architecture & Technical Specifications: LingoFlow AI
+# System Architecture & Technical Specifications: BhashaSetu
 
 ## 1. Architectural Philosophy
 
-LingoFlow AI is architected using **Modular Monolith principles** with Next.js 14 App Router. It separates client-side presentation components from backend business logic and external provider integrations.
+BhashaSetu is architected using **Modular Monolith principles** with Next.js 14 App Router. It separates client-side presentation components from backend business logic and external provider integrations.
 
 ```mermaid
 graph TD
@@ -51,7 +51,7 @@ This guarantees:
 ### 2.2 Payment & Webhook Idempotency Pattern
 When payment providers (Razorpay or Stripe) trigger webhooks upon successful subscription payments, network retries can send duplicate webhook notifications.
 
-To prevent double-crediting or race conditions, LingoFlow AI utilizes the **Idempotency Key Pattern** via the `PaymentEvent` table:
+To prevent double-crediting or race conditions, BhashaSetu utilizes the **Idempotency Key Pattern** via the `PaymentEvent` table:
 1. Webhook receives event payload with unique `eventId`.
 2. Checks `PaymentEvent.findUnique({ where: { eventId } })`.
 3. If already present, responds with HTTP `200 OK` and skips redundant execution.
