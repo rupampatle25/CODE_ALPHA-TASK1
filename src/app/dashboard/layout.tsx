@@ -1,10 +1,10 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
 import { getUserUsageThisMonth } from "@/services/usage/tracker";
 import {
-  Globe,
   Languages,
   History,
   ShoppingBag,
@@ -35,9 +35,13 @@ export default async function DashboardLayout({
         <div>
           {/* Brand Header */}
           <div className="h-16 px-6 flex items-center gap-2.5 border-b border-slate-800">
-            <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold">
-              <Globe className="w-4 h-4" />
-            </div>
+            <Image
+              src="/images/bhashasetu-logo.png"
+              alt="BhashaSetu Logo"
+              width={32}
+              height={32}
+              className="w-8 h-8 rounded-lg object-contain"
+            />
             <Link href="/dashboard" className="text-lg font-bold text-white tracking-tight">
               Bhasha<span className="text-blue-500">Setu</span>
             </Link>

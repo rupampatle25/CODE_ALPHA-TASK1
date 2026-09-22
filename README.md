@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="public/images/bhashasetu-logo.png" alt="BhashaSetu Logo" width="120" style="border-radius: 24px;" />
+</p>
+
 # BhashaSetu — Language Translation Tool 🌐
 ### *"Connecting Languages, Empowering Communication."*
 

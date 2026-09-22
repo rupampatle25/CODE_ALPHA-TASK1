@@ -7,7 +7,6 @@ import {
   Zap,
   Volume2,
   Lock,
-  Globe2,
   CheckCircle2,
   ArrowRight,
   Sparkles,

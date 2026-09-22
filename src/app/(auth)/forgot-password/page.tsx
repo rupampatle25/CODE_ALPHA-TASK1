@@ -2,8 +2,9 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Globe, Lock, Mail, ArrowRight, AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
+import { Lock, Mail, ArrowRight, AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 export default function ForgotPasswordPage() {
@@ -71,10 +72,15 @@ export default function ForgotPasswordPage() {
       </div>
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
-        <Link href="/landing" className="inline-flex items-center gap-2 mb-4 group">
-          <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
-            <Globe className="w-5 h-5" />
-          </div>
+        <Link href="/landing" className="inline-flex items-center gap-2.5 mb-4 group">
+          <Image
+            src="/images/bhashasetu-logo.png"
+            alt="BhashaSetu Logo"
+            width={44}
+            height={44}
+            className="w-11 h-11 rounded-xl object-contain shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform"
+            priority
+          />
           <span className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
             Bhasha<span className="text-blue-600 dark:text-blue-400">Setu</span>
           </span>

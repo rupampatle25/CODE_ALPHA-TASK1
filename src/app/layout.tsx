@@ -6,6 +6,11 @@ export const metadata: Metadata = {
   title: "BhashaSetu — Connecting Languages, Empowering Communication.",
   description: "Industry-ready AI language translation, localization, and tone adaptation SaaS platform. Connecting Languages, Empowering Communication.",
   keywords: ["BhashaSetu", "AI Translation", "Language Bridge", "Multilingual", "Localization", "Tone Adaptation"],
+  icons: {
+    icon: "/images/bhashasetu-logo.png",
+    shortcut: "/favicon.ico",
+    apple: "/images/bhashasetu-logo.png",
+  },
 };
 
 const themeScript = `

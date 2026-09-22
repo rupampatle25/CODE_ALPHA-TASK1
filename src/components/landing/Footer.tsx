@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { Globe, Shield, Heart } from "lucide-react";
+import Image from "next/image";
+import { Shield, Heart } from "lucide-react";
 
 export const Footer: React.FC = () => {
   return (
@@ -9,10 +10,14 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand Info */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2 text-white">
-              <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
-                <Globe className="w-4 h-4" />
-              </div>
+            <div className="flex items-center gap-2.5 text-white">
+              <Image
+                src="/images/bhashasetu-logo.png"
+                alt="BhashaSetu Logo"
+                width={32}
+                height={32}
+                className="w-8 h-8 rounded-lg object-contain"
+              />
               <span className="text-lg font-bold">BhashaSetu</span>
             </div>
             <p className="text-sm text-slate-400 leading-relaxed">

@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Globe, Menu, X, ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { Menu, X, ArrowRight } from "lucide-react";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 export const Navbar: React.FC = () => {
@@ -14,9 +15,14 @@ export const Navbar: React.FC = () => {
         <div className="flex items-center justify-between h-16">
           {/* Brand Logo */}
           <Link href="/landing" className="flex items-center gap-2.5 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
-              <Globe className="w-5 h-5" />
-            </div>
+            <Image
+              src="/images/bhashasetu-logo.png"
+              alt="BhashaSetu Logo"
+              width={40}
+              height={40}
+              className="w-10 h-10 rounded-xl object-contain shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform"
+              priority
+            />
             <div>
               <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">
                 Bhasha<span className="text-blue-600 dark:text-blue-400">Setu</span>
