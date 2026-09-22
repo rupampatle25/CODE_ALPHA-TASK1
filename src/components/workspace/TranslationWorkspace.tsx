@@ -1,15 +1,18 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { SOURCE_LANGUAGES, SUPPORTED_LANGUAGES, getLanguageName } from "@/services/translation/languages";
 import { LanguageSelector } from "./LanguageSelector";
 import { useSpeechSynthesis } from "@/hooks/useSpeechSynthesis";
+import { useSpeechRecognition } from "@/hooks/useSpeechRecognition";
 import {
   ArrowLeftRight,
   Copy,
   Check,
   Volume2,
   Square,
+  Mic,
+  MicOff,
   Trash2,
   Download,
   AlertCircle,
@@ -18,6 +21,8 @@ import {
   SlidersHorizontal,
   X,
   VolumeX,
+  Radio,
+  ShieldCheck,
 } from "lucide-react";
 
 export const TranslationWorkspace: React.FC = () => {
@@ -37,20 +42,33 @@ export const TranslationWorkspace: React.FC = () => {
   const [targetVoiceURI, setTargetVoiceURI] = useState<string>("");
   const [showAudioSettings, setShowAudioSettings] = useState<boolean>(false);
 
-  // Custom Speech Synthesis hook
+  // Custom Speech Synthesis hook (Text-to-Speech)
   const {
-    isSupported,
+    isSupported: isTTSSupported,
     isSpeaking,
     speakingSide,
     speechError,
-    clearError,
+    clearError: clearTTSError,
     getVoicesForLanguage,
     speak,
-    stop,
+    stop: stopTTS,
   } = useSpeechSynthesis();
 
-  // Compute available voices for source and target languages
+  // Custom Speech Recognition hook (Voice-to-Text)
+  const {
+    isSupported: isSTTSupported,
+    isListening,
+    interimTranscript,
+    recognitionError,
+    startListening,
+    stopListening,
+    clearError: clearSTTError,
+  } = useSpeechRecognition();
+
+  // Compute active language code
   const activeSourceLangCode = sourceLang === "auto" ? (detectedLang || "en") : sourceLang;
+
+  // Filter voices matching current languages
   const sourceVoices = useMemo(() => getVoicesForLanguage(activeSourceLangCode), [
     getVoicesForLanguage,
     activeSourceLangCode,
@@ -102,7 +120,8 @@ export const TranslationWorkspace: React.FC = () => {
 
   // Swap source and target languages
   const handleSwap = () => {
-    stop();
+    stopTTS();
+    stopListening();
     if (sourceLang === "auto") {
       setSourceLang(targetLang);
       setTargetLang(detectedLang && detectedLang !== "auto" ? detectedLang : "en");
@@ -132,7 +151,8 @@ export const TranslationWorkspace: React.FC = () => {
 
   // Clear text
   const handleClear = () => {
-    stop();
+    stopTTS();
+    stopListening();
     setSourceText("");
     setTranslatedText("");
     setErrorMessage(null);
@@ -151,10 +171,10 @@ export const TranslationWorkspace: React.FC = () => {
     document.body.removeChild(element);
   };
 
-  // Play / Stop toggle for Source Text
+  // Play / Stop toggle for Source Text (TTS)
   const toggleSourceSpeech = () => {
     if (isSpeaking && speakingSide === "source") {
-      stop();
+      stopTTS();
     } else {
       speak({
         text: sourceText,
@@ -166,10 +186,10 @@ export const TranslationWorkspace: React.FC = () => {
     }
   };
 
-  // Play / Stop toggle for Translated Text
+  // Play / Stop toggle for Translated Text (TTS)
   const toggleTargetSpeech = () => {
     if (isSpeaking && speakingSide === "target") {
-      stop();
+      stopTTS();
     } else {
       speak({
         text: translatedText,
@@ -177,6 +197,25 @@ export const TranslationWorkspace: React.FC = () => {
         side: "target",
         voiceURI: targetVoiceURI,
         rate: playbackRate,
+      });
+    }
+  };
+
+  // Microphone Voice-to-Text Toggle
+  const toggleListening = () => {
+    if (isListening) {
+      stopListening();
+    } else {
+      // Stop speech playback if currently talking
+      stopTTS();
+      startListening({
+        langCode: activeSourceLangCode,
+        onFinalTranscript: (spokenText) => {
+          setSourceText((prev) => {
+            const nextText = prev ? `${prev.trim()} ${spokenText.trim()}` : spokenText.trim();
+            return nextText;
+          });
+        },
       });
     }
   };
@@ -191,7 +230,8 @@ export const TranslationWorkspace: React.FC = () => {
             languages={SOURCE_LANGUAGES}
             value={sourceLang}
             onChange={(code) => {
-              stop();
+              stopTTS();
+              stopListening();
               setSourceLang(code);
               if (sourceText.trim()) handleTranslate(sourceText);
             }}
@@ -214,7 +254,7 @@ export const TranslationWorkspace: React.FC = () => {
             languages={SUPPORTED_LANGUAGES}
             value={targetLang}
             onChange={(code) => {
-              stop();
+              stopTTS();
               setTargetLang(code);
               if (sourceText.trim()) handleTranslate(sourceText);
             }}
@@ -256,7 +296,7 @@ export const TranslationWorkspace: React.FC = () => {
             <div className="flex flex-wrap items-center gap-4">
               {/* Playback Speed Selector */}
               <div className="flex items-center gap-2">
-                <span className="font-semibold text-slate-600">Speed:</span>
+                <span className="font-semibold text-slate-600">TTS Speed:</span>
                 <div className="inline-flex rounded-lg border border-slate-300 bg-white p-0.5 shadow-2xs">
                   {[0.75, 1.0, 1.25].map((rate) => (
                     <button
@@ -318,26 +358,50 @@ export const TranslationWorkspace: React.FC = () => {
               )}
             </div>
 
-            <button
-              type="button"
-              onClick={() => setShowAudioSettings(false)}
-              className="text-slate-400 hover:text-slate-600 p-1 rounded"
-              title="Close settings"
-            >
-              <X className="w-4 h-4" />
-            </button>
+            <div className="flex items-center gap-3">
+              <span className="text-[11px] text-slate-500 flex items-center gap-1">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                Audio processed client-side (Zero audio stored)
+              </span>
+
+              <button
+                type="button"
+                onClick={() => setShowAudioSettings(false)}
+                className="text-slate-400 hover:text-slate-600 p-1 rounded"
+                title="Close settings"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
           </div>
 
-          {!isSupported && (
+          {!isTTSSupported && (
             <div className="mt-2 text-amber-700 flex items-center gap-1.5 font-medium">
               <VolumeX className="w-3.5 h-3.5 flex-shrink-0" />
-              <span>Web Speech API is not supported in this browser. Audio playback will be disabled.</span>
+              <span>Web Speech Synthesis is not supported in this browser.</span>
             </div>
           )}
         </div>
       )}
 
-      {/* Speech Error Banner */}
+      {/* Speech Recognition Error Banner */}
+      {recognitionError && (
+        <div className="bg-red-50 border-b border-red-200 px-4 py-2.5 text-xs text-red-800 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0" />
+            <span>{recognitionError}</span>
+          </div>
+          <button
+            type="button"
+            onClick={clearSTTError}
+            className="text-red-700 hover:text-red-900 font-bold ml-2 underline"
+          >
+            Dismiss
+          </button>
+        </div>
+      )}
+
+      {/* Speech Synthesis Error Banner */}
       {speechError && (
         <div className="bg-amber-50 border-b border-amber-200 px-4 py-2 text-xs text-amber-800 flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -346,7 +410,7 @@ export const TranslationWorkspace: React.FC = () => {
           </div>
           <button
             type="button"
-            onClick={clearError}
+            onClick={clearTTSError}
             className="text-amber-700 hover:text-amber-900 font-bold ml-2"
           >
             Dismiss
@@ -359,13 +423,24 @@ export const TranslationWorkspace: React.FC = () => {
         {/* Source Text Panel */}
         <div className="flex flex-col p-4 sm:p-6 bg-white relative">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-              {sourceLang === "auto"
-                ? detectedLang
-                  ? `Detected: ${getLanguageName(detectedLang)}`
-                  : "Detecting..."
-                : getLanguageName(sourceLang)}
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                {sourceLang === "auto"
+                  ? detectedLang
+                    ? `Detected: ${getLanguageName(detectedLang)}`
+                    : "Detecting..."
+                  : getLanguageName(sourceLang)}
+              </span>
+
+              {/* Live Listening Indicator Badge */}
+              {isListening && (
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-red-100 text-red-700 border border-red-200 animate-pulse">
+                  <span className="w-2 h-2 rounded-full bg-red-600 animate-ping" />
+                  Recording... Speak in {getLanguageName(activeSourceLangCode)}
+                </span>
+              )}
+            </div>
+
             {sourceText && (
               <button
                 type="button"
@@ -378,28 +453,75 @@ export const TranslationWorkspace: React.FC = () => {
             )}
           </div>
 
-          <textarea
-            value={sourceText}
-            onChange={(e) => setSourceText(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
-                e.preventDefault();
-                handleTranslate();
+          {/* Text Area with Live Dictation Preview */}
+          <div className="relative flex-1 flex flex-col">
+            <textarea
+              value={sourceText}
+              onChange={(e) => setSourceText(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
+                  e.preventDefault();
+                  handleTranslate();
+                }
+              }}
+              placeholder={
+                isListening
+                  ? "Listening to your voice... Speak now."
+                  : "Type, paste text, or click the microphone to speak..."
               }
-            }}
-            placeholder="Type, paste text, or press Ctrl+Enter to translate..."
-            maxLength={5000}
-            className="w-full flex-1 resize-none border-0 p-0 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-0 text-base leading-relaxed"
-          />
+              maxLength={5000}
+              className="w-full flex-1 resize-none border-0 p-0 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-0 text-base leading-relaxed"
+            />
+
+            {/* Interim Speech Transcript Preview */}
+            {isListening && interimTranscript && (
+              <div className="mt-1 p-2 bg-blue-50/70 border border-blue-200 rounded-lg text-xs text-blue-800 italic animate-fade-in flex items-center gap-1.5">
+                <Radio className="w-3.5 h-3.5 text-blue-600 animate-pulse flex-shrink-0" />
+                <span>Hearing: &quot;{interimTranscript}&quot;</span>
+              </div>
+            )}
+          </div>
 
           {/* Source Panel Bottom Toolbar */}
           <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              {/* Play / Stop Button for Source */}
+              {/* Voice-to-Text Microphone Button */}
+              <button
+                type="button"
+                onClick={toggleListening}
+                disabled={!isSTTSupported}
+                title={
+                  isListening
+                    ? "Stop voice recording (Listening...)"
+                    : "Speak with microphone (Voice Input)"
+                }
+                aria-label={
+                  isListening ? "Stop voice recording" : "Speak with microphone"
+                }
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                  isListening
+                    ? "bg-red-600 text-white shadow-md shadow-red-500/30 animate-pulse hover:bg-red-700"
+                    : "bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 border border-slate-200 disabled:opacity-40"
+                }`}
+              >
+                {isListening ? (
+                  <>
+                    <MicOff className="w-3.5 h-3.5" />
+                    <span>Stop Voice</span>
+                  </>
+                ) : (
+                  <>
+                    <Mic className="w-3.5 h-3.5 text-blue-600" />
+                    <span>Voice Input</span>
+                  </>
+                )}
+              </button>
+
+              {/* Text-to-Speech Play / Stop Button for Source */}
               <button
                 type="button"
                 onClick={toggleSourceSpeech}
-                disabled={!sourceText.trim() || !isSupported}
+                disabled={!sourceText.trim() || !isTTSSupported}
                 title={
                   isSpeaking && speakingSide === "source"
                     ? "Stop speaking original text"
@@ -494,7 +616,7 @@ export const TranslationWorkspace: React.FC = () => {
               <button
                 type="button"
                 onClick={toggleTargetSpeech}
-                disabled={!translatedText || !isSupported}
+                disabled={!translatedText || !isTTSSupported}
                 title={
                   isSpeaking && speakingSide === "target"
                     ? "Stop speaking translation"
@@ -558,7 +680,7 @@ export const TranslationWorkspace: React.FC = () => {
         </div>
       </div>
 
-      {/* Error Alert Box */}
+      {/* Translation API Error Alert Box */}
       {errorMessage && (
         <div className="bg-red-50 border-t border-red-200 p-4 flex items-start gap-3 text-red-700">
           <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
