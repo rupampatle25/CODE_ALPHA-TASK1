@@ -13,6 +13,7 @@ import {
   LogOut,
   Sparkles,
 } from "lucide-react";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 export default async function DashboardLayout({
   children,
@@ -30,7 +31,7 @@ export default async function DashboardLayout({
   const usagePercentage = Math.min(100, Math.round((usageThisMonth / charLimit) * 100));
 
   return (
-    <div className="min-h-screen bg-slate-100 flex flex-col md:flex-row">
+    <div className="min-h-screen bg-slate-100 dark:bg-slate-950 flex flex-col md:flex-row transition-colors">
       {/* Sidebar Navigation */}
       <aside className="w-full md:w-64 bg-slate-900 text-slate-300 flex flex-col justify-between flex-shrink-0">
         <div>
@@ -138,19 +139,20 @@ export default async function DashboardLayout({
       {/* Main Page Content */}
       <main className="flex-1 flex flex-col min-w-0 overflow-y-auto">
         {/* Top Header */}
-        <header className="h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between">
+        <header className="h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-6 flex items-center justify-between transition-colors">
           <div className="flex items-center gap-2">
-            <h1 className="text-base font-bold text-slate-800">LingoFlow Dashboard</h1>
+            <h1 className="text-base font-bold text-slate-800 dark:text-slate-100">LingoFlow Dashboard</h1>
           </div>
           <div className="flex items-center gap-3">
             <Link
               href="/"
-              className="text-xs text-slate-500 hover:text-slate-800 transition-colors hidden sm:inline"
+              className="text-xs text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors hidden sm:inline"
             >
               Public Homepage
             </Link>
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
-              <Sparkles className="w-3 h-3 text-blue-500" />
+            <ThemeToggle />
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
+              <Sparkles className="w-3 h-3 text-blue-500 dark:text-blue-400" />
               {user.plan.name}
             </span>
           </div>

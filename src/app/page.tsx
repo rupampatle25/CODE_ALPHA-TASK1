@@ -19,27 +19,27 @@ import {
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col min-h-screen bg-slate-50 text-slate-900">
+    <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors">
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative pt-12 pb-20 md:pt-16 md:pb-28 overflow-hidden bg-gradient-to-b from-blue-50/50 via-white to-slate-50">
+      <section className="relative pt-12 pb-20 md:pt-16 md:pb-28 overflow-hidden bg-gradient-to-b from-blue-50/50 via-white to-slate-50 dark:from-slate-900/60 dark:via-slate-950 dark:to-slate-950 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-10">
             {/* Pill badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800 mb-6 border border-blue-200 shadow-sm">
-              <Sparkles className="w-3.5 h-3.5 text-blue-600" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold bg-blue-100 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300 mb-6 border border-blue-200 dark:border-blue-800 shadow-sm">
+              <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
               <span>Next-Gen Language Translation & Productivity SaaS</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-950 tracking-tight leading-tight mb-6">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-950 dark:text-white tracking-tight leading-tight mb-6">
               Break Language Barriers. <br className="hidden sm:inline" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">
                 Grow Without Borders.
               </span>
             </h1>
 
-            <p className="text-lg sm:text-xl text-slate-600 leading-relaxed">
+            <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
               Instant, accurate multilingual translation with built-in voice pronunciation, 
               one-click copy, and business localization tools for students, creators, and global sellers.
             </p>
@@ -47,72 +47,72 @@ export default function HomePage() {
 
           {/* Core Interactive Translation Workspace (Assignment Task 1 in Action) */}
           <div id="workspace" className="relative z-10 scroll-mt-24">
-            <div className="absolute -inset-1.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-3xl blur-xl opacity-20 transition duration-1000 group-hover:opacity-100 -z-10" />
+            <div className="absolute -inset-1.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-3xl blur-xl opacity-20 dark:opacity-30 transition duration-1000 group-hover:opacity-100 -z-10" />
             <TranslationWorkspace />
           </div>
 
           {/* Quick Stats Bar */}
           <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto text-center">
-            <div className="p-4 rounded-xl bg-white/60 border border-slate-200/80 shadow-xs">
-              <div className="text-2xl font-bold text-slate-900">30+</div>
-              <div className="text-xs text-slate-500 mt-1">Supported Languages</div>
+            <div className="p-4 rounded-xl bg-white/60 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 shadow-xs">
+              <div className="text-2xl font-bold text-slate-900 dark:text-white">30+</div>
+              <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Supported Languages</div>
             </div>
-            <div className="p-4 rounded-xl bg-white/60 border border-slate-200/80 shadow-xs">
-              <div className="text-2xl font-bold text-slate-900">&lt; 350ms</div>
-              <div className="text-xs text-slate-500 mt-1">Average Response Time</div>
+            <div className="p-4 rounded-xl bg-white/60 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 shadow-xs">
+              <div className="text-2xl font-bold text-slate-900 dark:text-white">&lt; 350ms</div>
+              <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Average Response Time</div>
             </div>
-            <div className="p-4 rounded-xl bg-white/60 border border-slate-200/80 shadow-xs">
-              <div className="text-2xl font-bold text-slate-900">Native Audio</div>
-              <div className="text-xs text-slate-500 mt-1">Speech Pronunciation</div>
+            <div className="p-4 rounded-xl bg-white/60 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 shadow-xs">
+              <div className="text-2xl font-bold text-slate-900 dark:text-white">Native Audio</div>
+              <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Speech Pronunciation</div>
             </div>
-            <div className="p-4 rounded-xl bg-white/60 border border-slate-200/80 shadow-xs">
-              <div className="text-2xl font-bold text-slate-900">100% Secure</div>
-              <div className="text-xs text-slate-500 mt-1">Encrypted Server API</div>
+            <div className="p-4 rounded-xl bg-white/60 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 shadow-xs">
+              <div className="text-2xl font-bold text-slate-900 dark:text-white">100% Secure</div>
+              <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Encrypted Server API</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 bg-white border-t border-slate-200">
+      <section id="features" className="py-20 bg-white dark:bg-slate-900/50 border-t border-slate-200 dark:border-slate-800 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-2">Capabilities</h2>
-            <h3 className="text-3xl font-extrabold text-slate-900 sm:text-4xl">
+            <h2 className="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 mb-2">Capabilities</h2>
+            <h3 className="text-3xl font-extrabold text-slate-900 dark:text-white sm:text-4xl">
               Engineered for Speed, Clarity, and Scale
             </h3>
-            <p className="mt-4 text-slate-600">
+            <p className="mt-4 text-slate-600 dark:text-slate-400">
               Everything you need to translate, vocalize, and adapt content effortlessly.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-8 rounded-2xl bg-slate-50 border border-slate-200 hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center mb-6">
+            <div className="p-8 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-6">
                 <Zap className="w-6 h-6" />
               </div>
-              <h4 className="text-xl font-bold text-slate-900 mb-3">Instant Translation API</h4>
-              <p className="text-slate-600 text-sm leading-relaxed">
+              <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Instant Translation API</h4>
+              <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
                 Connects through our secure server abstraction to high-fidelity translation engines with automatic language detection.
               </p>
             </div>
 
-            <div className="p-8 rounded-2xl bg-slate-50 border border-slate-200 hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center mb-6">
+            <div className="p-8 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 rounded-xl bg-indigo-100 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-6">
                 <Volume2 className="w-6 h-6" />
               </div>
-              <h4 className="text-xl font-bold text-slate-900 mb-3">Text-to-Speech Audio</h4>
-              <p className="text-slate-600 text-sm leading-relaxed">
+              <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Text-to-Speech Audio</h4>
+              <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
                 Listen to accurate, native pronunciations in both source and target accents with zero server delay.
               </p>
             </div>
 
-            <div className="p-8 rounded-2xl bg-slate-50 border border-slate-200 hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center mb-6">
+            <div className="p-8 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-6">
                 <ShoppingBag className="w-6 h-6" />
               </div>
-              <h4 className="text-xl font-bold text-slate-900 mb-3">Product Description Assistant</h4>
-              <p className="text-slate-600 text-sm leading-relaxed">
+              <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Product Description Assistant</h4>
+              <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
                 Tailored for e-commerce sellers and marketers. Convert product listings into compelling, localized copy in seconds.
               </p>
             </div>
@@ -121,42 +121,42 @@ export default function HomePage() {
       </section>
 
       {/* How It Works Section */}
-      <section id="how-it-works" className="py-20 bg-slate-50 border-t border-slate-200">
+      <section id="how-it-works" className="py-20 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-2">Simple Workflow</h2>
-            <h3 className="text-3xl font-extrabold text-slate-900 sm:text-4xl">
+            <h2 className="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 mb-2">Simple Workflow</h2>
+            <h3 className="text-3xl font-extrabold text-slate-900 dark:text-white sm:text-4xl">
               Three Steps to Global Reach
             </h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm relative">
+            <div className="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm relative">
               <div className="w-10 h-10 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center mx-auto mb-4 text-lg">
                 1
               </div>
-              <h4 className="text-lg font-bold text-slate-900 mb-2">Input Your Content</h4>
-              <p className="text-sm text-slate-600">
+              <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Input Your Content</h4>
+              <p className="text-sm text-slate-600 dark:text-slate-400">
                 Type or paste any text up to 5,000 characters. Our system can auto-detect the language automatically.
               </p>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm relative">
+            <div className="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm relative">
               <div className="w-10 h-10 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center mx-auto mb-4 text-lg">
                 2
               </div>
-              <h4 className="text-lg font-bold text-slate-900 mb-2">Select Target Language</h4>
-              <p className="text-sm text-slate-600">
+              <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Select Target Language</h4>
+              <p className="text-sm text-slate-600 dark:text-slate-400">
                 Pick from over 30 languages spanning Europe, Asia, and the Americas with full script support.
               </p>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm relative">
+            <div className="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm relative">
               <div className="w-10 h-10 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center mx-auto mb-4 text-lg">
                 3
               </div>
-              <h4 className="text-lg font-bold text-slate-900 mb-2">Copy, Vocalize & Export</h4>
-              <p className="text-sm text-slate-600">
+              <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Copy, Vocalize & Export</h4>
+              <p className="text-sm text-slate-600 dark:text-slate-400">
                 Play back the natural speech audio, copy the translation with one click, or export to a text file.
               </p>
             </div>
@@ -165,36 +165,36 @@ export default function HomePage() {
       </section>
 
       {/* Target Audiences / Use Cases */}
-      <section className="py-20 bg-white border-t border-slate-200">
+      <section className="py-20 bg-white dark:bg-slate-900/50 border-t border-slate-200 dark:border-slate-800 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-2">Built For You</h2>
-            <h3 className="text-3xl font-extrabold text-slate-900 sm:text-4xl">
+            <h2 className="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 mb-2">Built For You</h2>
+            <h3 className="text-3xl font-extrabold text-slate-900 dark:text-white sm:text-4xl">
               Who Uses LingoFlow AI?
             </h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 rounded-xl border border-slate-200 hover:border-blue-300 transition-colors">
-              <BookOpen className="w-8 h-8 text-blue-600 mb-3" />
-              <h4 className="text-lg font-bold text-slate-900 mb-2">Students & Educators</h4>
-              <p className="text-sm text-slate-600 leading-relaxed">
+            <div className="p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 hover:border-blue-300 dark:hover:border-blue-500 transition-colors">
+              <BookOpen className="w-8 h-8 text-blue-600 dark:text-blue-400 mb-3" />
+              <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Students & Educators</h4>
+              <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                 Translate research papers, check pronunciation for foreign language classes, and save translation history for easy review.
               </p>
             </div>
 
-            <div className="p-6 rounded-xl border border-slate-200 hover:border-blue-300 transition-colors">
-              <ShoppingBag className="w-8 h-8 text-indigo-600 mb-3" />
-              <h4 className="text-lg font-bold text-slate-900 mb-2">E-Commerce Sellers</h4>
-              <p className="text-sm text-slate-600 leading-relaxed">
+            <div className="p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 hover:border-blue-300 dark:hover:border-blue-500 transition-colors">
+              <ShoppingBag className="w-8 h-8 text-indigo-600 dark:text-indigo-400 mb-3" />
+              <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-2">E-Commerce Sellers</h4>
+              <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                 Expand product listings to global Amazon or Shopify stores. Adapt product titles and feature bullets to match buyer expectations.
               </p>
             </div>
 
-            <div className="p-6 rounded-xl border border-slate-200 hover:border-blue-300 transition-colors">
-              <Briefcase className="w-8 h-8 text-emerald-600 mb-3" />
-              <h4 className="text-lg font-bold text-slate-900 mb-2">Freelancers & Creators</h4>
-              <p className="text-sm text-slate-600 leading-relaxed">
+            <div className="p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 hover:border-blue-300 dark:hover:border-blue-500 transition-colors">
+              <Briefcase className="w-8 h-8 text-emerald-600 dark:text-emerald-400 mb-3" />
+              <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Freelancers & Creators</h4>
+              <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                 Communicate with international clients seamlessly and translate social media captions to reach worldwide audiences.
               </p>
             </div>
@@ -203,33 +203,33 @@ export default function HomePage() {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-20 bg-slate-50 border-t border-slate-200">
+      <section id="pricing" className="py-20 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-2">Transparent Pricing</h2>
-            <h3 className="text-3xl font-extrabold text-slate-900 sm:text-4xl">
+            <h2 className="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 mb-2">Transparent Pricing</h2>
+            <h3 className="text-3xl font-extrabold text-slate-900 dark:text-white sm:text-4xl">
               Predictable Plans for Every Stage
             </h3>
-            <p className="mt-4 text-slate-600">
+            <p className="mt-4 text-slate-600 dark:text-slate-400">
               Start completely free. Upgrade when your global traffic expands.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {/* Free Tier */}
-            <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div className="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
               <div>
                 <div className="flex justify-between items-center mb-4">
-                  <h4 className="text-xl font-bold text-slate-900">Free Tier</h4>
-                  <span className="px-2.5 py-1 text-xs font-semibold bg-slate-100 text-slate-700 rounded-full">
+                  <h4 className="text-xl font-bold text-slate-900 dark:text-white">Free Tier</h4>
+                  <span className="px-2.5 py-1 text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-full">
                     Starter
                   </span>
                 </div>
                 <div className="mb-6">
-                  <span className="text-4xl font-extrabold text-slate-950">$0</span>
-                  <span className="text-slate-500 text-sm"> / month</span>
+                  <span className="text-4xl font-extrabold text-slate-950 dark:text-white">$0</span>
+                  <span className="text-slate-500 dark:text-slate-400 text-sm"> / month</span>
                 </div>
-                <ul className="space-y-3 text-sm text-slate-600 mb-8">
+                <ul className="space-y-3 text-sm text-slate-600 dark:text-slate-300 mb-8">
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
                     <span>5,000 characters per month</span>
@@ -250,43 +250,43 @@ export default function HomePage() {
               </div>
               <Link
                 href="/signup"
-                className="w-full text-center py-2.5 px-4 rounded-xl border border-slate-300 font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+                className="w-full text-center py-2.5 px-4 rounded-xl border border-slate-300 dark:border-slate-700 font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
               >
                 Get Started Free
               </Link>
             </div>
 
             {/* Pro Tier */}
-            <div className="bg-white p-8 rounded-2xl border-2 border-blue-600 shadow-lg relative flex flex-col justify-between">
+            <div className="bg-white dark:bg-slate-900 p-8 rounded-2xl border-2 border-blue-600 shadow-lg relative flex flex-col justify-between">
               <div className="absolute -top-3 right-6 bg-blue-600 text-white text-xs font-bold uppercase tracking-wider px-3 py-0.5 rounded-full shadow-sm">
                 Most Popular
               </div>
               <div>
                 <div className="flex justify-between items-center mb-4">
-                  <h4 className="text-xl font-bold text-slate-900">Pro Creator</h4>
-                  <span className="px-2.5 py-1 text-xs font-semibold bg-blue-100 text-blue-700 rounded-full">
+                  <h4 className="text-xl font-bold text-slate-900 dark:text-white">Pro Creator</h4>
+                  <span className="px-2.5 py-1 text-xs font-semibold bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 rounded-full">
                     Professional
                   </span>
                 </div>
                 <div className="mb-6">
-                  <span className="text-4xl font-extrabold text-slate-950">$9</span>
-                  <span className="text-slate-500 text-sm"> / month (or ₹499)</span>
+                  <span className="text-4xl font-extrabold text-slate-950 dark:text-white">$9</span>
+                  <span className="text-slate-500 dark:text-slate-400 text-sm"> / month (or ₹499)</span>
                 </div>
-                <ul className="space-y-3 text-sm text-slate-600 mb-8">
-                  <li className="flex items-center gap-2 font-medium text-slate-900">
-                    <CheckCircle2 className="w-4 h-4 text-blue-600 flex-shrink-0" />
+                <ul className="space-y-3 text-sm text-slate-600 dark:text-slate-300 mb-8">
+                  <li className="flex items-center gap-2 font-medium text-slate-900 dark:text-white">
+                    <CheckCircle2 className="w-4 h-4 text-blue-600 dark:text-blue-400 flex-shrink-0" />
                     <span>100,000 characters per month</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-blue-600 flex-shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-blue-600 dark:text-blue-400 flex-shrink-0" />
                     <span>Multilingual Product Description Assistant</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-blue-600 flex-shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-blue-600 dark:text-blue-400 flex-shrink-0" />
                     <span>Unlimited translation history search</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-blue-600 flex-shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-blue-600 dark:text-blue-400 flex-shrink-0" />
                     <span>Priority high-speed server bandwidth</span>
                   </li>
                 </ul>
@@ -303,33 +303,33 @@ export default function HomePage() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-20 bg-white border-t border-slate-200">
+      <section id="faq" className="py-20 bg-white dark:bg-slate-900/50 border-t border-slate-200 dark:border-slate-800 transition-colors">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-2">Got Questions?</h2>
-            <h3 className="text-3xl font-extrabold text-slate-900">
+            <h2 className="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 mb-2">Got Questions?</h2>
+            <h3 className="text-3xl font-extrabold text-slate-900 dark:text-white">
               Frequently Asked Questions
             </h3>
           </div>
 
           <div className="space-y-6">
-            <div className="p-6 rounded-xl border border-slate-200 bg-slate-50/50">
-              <h4 className="font-semibold text-slate-900 mb-2">How does LingoFlow AI perform translations?</h4>
-              <p className="text-sm text-slate-600 leading-relaxed">
+            <div className="p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+              <h4 className="font-semibold text-slate-900 dark:text-white mb-2">How does LingoFlow AI perform translations?</h4>
+              <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                 LingoFlow AI connects to production-grade neural translation APIs server-side. Your API keys are strictly secured in environment variables and never exposed to client browsers.
               </p>
             </div>
 
-            <div className="p-6 rounded-xl border border-slate-200 bg-slate-50/50">
-              <h4 className="font-semibold text-slate-900 mb-2">Is the Text-to-Speech audio free?</h4>
-              <p className="text-sm text-slate-600 leading-relaxed">
+            <div className="p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+              <h4 className="font-semibold text-slate-900 dark:text-white mb-2">Is the Text-to-Speech audio free?</h4>
+              <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                 Yes! We leverage the browser&apos;s native Web Speech API to provide instantaneous, zero-latency pronunciation without incurring third-party audio API fees.
               </p>
             </div>
 
-            <div className="p-6 rounded-xl border border-slate-200 bg-slate-50/50">
-              <h4 className="font-semibold text-slate-900 mb-2">Can I switch translation providers?</h4>
-              <p className="text-sm text-slate-600 leading-relaxed">
+            <div className="p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+              <h4 className="font-semibold text-slate-900 dark:text-white mb-2">Can I switch translation providers?</h4>
+              <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                 Yes. Our provider architecture is completely modular. You can switch between MyMemory, Google Cloud Translation, or other vendors by updating a single environment variable.
               </p>
             </div>

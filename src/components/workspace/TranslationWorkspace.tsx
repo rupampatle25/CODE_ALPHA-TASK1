@@ -221,9 +221,9 @@ export const TranslationWorkspace: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden transition-all">
+    <div className="w-full max-w-5xl mx-auto bg-white dark:bg-slate-900 rounded-2xl shadow-xl dark:shadow-slate-950/60 border border-slate-200 dark:border-slate-800 overflow-hidden transition-colors">
       {/* Top Language & Settings Bar */}
-      <div className="bg-slate-50 border-b border-slate-200 px-4 py-3 sm:px-6 flex flex-wrap items-center justify-between gap-4">
+      <div className="bg-slate-50 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-700/80 px-4 py-3 sm:px-6 flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-2 sm:gap-4 flex-1">
           <LanguageSelector
             label="From"
@@ -244,7 +244,7 @@ export const TranslationWorkspace: React.FC = () => {
             disabled={isLoading}
             title="Swap Languages"
             aria-label="Swap Languages"
-            className="p-2 rounded-lg text-slate-500 hover:text-blue-600 hover:bg-blue-50 border border-slate-200 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <ArrowLeftRight className="w-4 h-4" />
           </button>
@@ -265,8 +265,8 @@ export const TranslationWorkspace: React.FC = () => {
         {/* Status Indicator & Voice Settings Toggle */}
         <div className="flex items-center gap-2">
           {provider && (
-            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">
-              <Sparkles className="w-3 h-3 mr-1 text-blue-500" />
+            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
+              <Sparkles className="w-3 h-3 mr-1 text-blue-500 dark:text-blue-400" />
               {provider}
             </span>
           )}
@@ -280,7 +280,7 @@ export const TranslationWorkspace: React.FC = () => {
             className={`p-2 rounded-lg border text-xs font-medium flex items-center gap-1.5 transition-colors ${
               showAudioSettings
                 ? "bg-blue-600 text-white border-blue-600"
-                : "bg-white text-slate-600 border-slate-200 hover:bg-slate-100"
+                : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700"
             }`}
           >
             <SlidersHorizontal className="w-3.5 h-3.5" />
@@ -291,13 +291,13 @@ export const TranslationWorkspace: React.FC = () => {
 
       {/* Expandable Audio Settings Panel */}
       {showAudioSettings && (
-        <div className="bg-slate-100/80 border-b border-slate-200 px-4 py-3 sm:px-6 animate-fade-in text-xs text-slate-700">
+        <div className="bg-slate-100/80 dark:bg-slate-800/90 border-b border-slate-200 dark:border-slate-700 px-4 py-3 sm:px-6 animate-fade-in text-xs text-slate-700 dark:text-slate-300">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="flex flex-wrap items-center gap-4">
               {/* Playback Speed Selector */}
               <div className="flex items-center gap-2">
-                <span className="font-semibold text-slate-600">TTS Speed:</span>
-                <div className="inline-flex rounded-lg border border-slate-300 bg-white p-0.5 shadow-2xs">
+                <span className="font-semibold text-slate-600 dark:text-slate-400">TTS Speed:</span>
+                <div className="inline-flex rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 p-0.5 shadow-2xs">
                   {[0.75, 1.0, 1.25].map((rate) => (
                     <button
                       key={rate}
@@ -306,7 +306,7 @@ export const TranslationWorkspace: React.FC = () => {
                       className={`px-2 py-0.5 rounded text-xs font-semibold transition-all ${
                         playbackRate === rate
                           ? "bg-blue-600 text-white shadow-2xs"
-                          : "text-slate-600 hover:text-slate-900"
+                          : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                       }`}
                     >
                       {rate === 1.0 ? "1x" : `${rate}x`}
@@ -318,17 +318,17 @@ export const TranslationWorkspace: React.FC = () => {
               {/* Source Voice Selector */}
               {sourceVoices.length > 0 && (
                 <div className="flex items-center gap-2">
-                  <span className="font-semibold text-slate-600">
+                  <span className="font-semibold text-slate-600 dark:text-slate-400">
                     {getLanguageName(activeSourceLangCode)} Voice:
                   </span>
                   <select
                     value={sourceVoiceURI}
                     onChange={(e) => setSourceVoiceURI(e.target.value)}
-                    className="bg-white border border-slate-300 text-slate-800 rounded px-2 py-1 max-w-[180px] truncate"
+                    className="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 rounded px-2 py-1 max-w-[180px] truncate"
                   >
                     <option value="">Default Voice</option>
                     {sourceVoices.map((v) => (
-                      <option key={v.voiceURI} value={v.voiceURI}>
+                      <option key={v.voiceURI} value={v.voiceURI} className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">
                         {v.name} ({v.lang})
                       </option>
                     ))}
@@ -339,17 +339,17 @@ export const TranslationWorkspace: React.FC = () => {
               {/* Target Voice Selector */}
               {targetVoices.length > 0 && (
                 <div className="flex items-center gap-2">
-                  <span className="font-semibold text-slate-600">
+                  <span className="font-semibold text-slate-600 dark:text-slate-400">
                     {getLanguageName(targetLang)} Voice:
                   </span>
                   <select
                     value={targetVoiceURI}
                     onChange={(e) => setTargetVoiceURI(e.target.value)}
-                    className="bg-white border border-slate-300 text-slate-800 rounded px-2 py-1 max-w-[180px] truncate"
+                    className="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 rounded px-2 py-1 max-w-[180px] truncate"
                   >
                     <option value="">Default Voice</option>
                     {targetVoices.map((v) => (
-                      <option key={v.voiceURI} value={v.voiceURI}>
+                      <option key={v.voiceURI} value={v.voiceURI} className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">
                         {v.name} ({v.lang})
                       </option>
                     ))}
@@ -359,15 +359,15 @@ export const TranslationWorkspace: React.FC = () => {
             </div>
 
             <div className="flex items-center gap-3">
-              <span className="text-[11px] text-slate-500 flex items-center gap-1">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+              <span className="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                 Audio processed client-side (Zero audio stored)
               </span>
 
               <button
                 type="button"
                 onClick={() => setShowAudioSettings(false)}
-                className="text-slate-400 hover:text-slate-600 p-1 rounded"
+                className="text-slate-400 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1 rounded"
                 title="Close settings"
               >
                 <X className="w-4 h-4" />
@@ -376,7 +376,7 @@ export const TranslationWorkspace: React.FC = () => {
           </div>
 
           {!isTTSSupported && (
-            <div className="mt-2 text-amber-700 flex items-center gap-1.5 font-medium">
+            <div className="mt-2 text-amber-700 dark:text-amber-400 flex items-center gap-1.5 font-medium">
               <VolumeX className="w-3.5 h-3.5 flex-shrink-0" />
               <span>Web Speech Synthesis is not supported in this browser.</span>
             </div>
@@ -386,15 +386,15 @@ export const TranslationWorkspace: React.FC = () => {
 
       {/* Speech Recognition Error Banner */}
       {recognitionError && (
-        <div className="bg-red-50 border-b border-red-200 px-4 py-2.5 text-xs text-red-800 flex items-center justify-between">
+        <div className="bg-red-50 dark:bg-red-950/40 border-b border-red-200 dark:border-red-900 px-4 py-2.5 text-xs text-red-800 dark:text-red-300 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0" />
+            <AlertCircle className="w-4 h-4 text-red-600 dark:text-red-400 flex-shrink-0" />
             <span>{recognitionError}</span>
           </div>
           <button
             type="button"
             onClick={clearSTTError}
-            className="text-red-700 hover:text-red-900 font-bold ml-2 underline"
+            className="text-red-700 dark:text-red-400 hover:text-red-900 dark:hover:text-red-200 font-bold ml-2 underline"
           >
             Dismiss
           </button>
@@ -403,15 +403,15 @@ export const TranslationWorkspace: React.FC = () => {
 
       {/* Speech Synthesis Error Banner */}
       {speechError && (
-        <div className="bg-amber-50 border-b border-amber-200 px-4 py-2 text-xs text-amber-800 flex items-center justify-between">
+        <div className="bg-amber-50 dark:bg-amber-950/40 border-b border-amber-200 dark:border-amber-900 px-4 py-2 text-xs text-amber-800 dark:text-amber-300 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <AlertCircle className="w-4 h-4 text-amber-600 flex-shrink-0" />
+            <AlertCircle className="w-4 h-4 text-amber-600 dark:text-amber-400 flex-shrink-0" />
             <span>{speechError}</span>
           </div>
           <button
             type="button"
             onClick={clearTTSError}
-            className="text-amber-700 hover:text-amber-900 font-bold ml-2"
+            className="text-amber-700 dark:text-amber-400 hover:text-amber-900 dark:hover:text-amber-200 font-bold ml-2"
           >
             Dismiss
           </button>
@@ -419,12 +419,12 @@ export const TranslationWorkspace: React.FC = () => {
       )}
 
       {/* Main Panels: Input & Output */}
-      <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-200 min-h-[340px]">
+      <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-200 dark:divide-slate-800 min-h-[340px]">
         {/* Source Text Panel */}
-        <div className="flex flex-col p-4 sm:p-6 bg-white relative">
+        <div className="flex flex-col p-4 sm:p-6 bg-white dark:bg-slate-900 relative">
           <div className="flex justify-between items-center mb-2">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+              <span className="text-xs font-semibold text-slate-400 dark:text-slate-400 uppercase tracking-wider">
                 {sourceLang === "auto"
                   ? detectedLang
                     ? `Detected: ${getLanguageName(detectedLang)}`
@@ -434,7 +434,7 @@ export const TranslationWorkspace: React.FC = () => {
 
               {/* Live Listening Indicator Badge */}
               {isListening && (
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-red-100 text-red-700 border border-red-200 animate-pulse">
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-red-100 dark:bg-red-950/60 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800 animate-pulse">
                   <span className="w-2 h-2 rounded-full bg-red-600 animate-ping" />
                   Recording... Speak in {getLanguageName(activeSourceLangCode)}
                 </span>
@@ -445,7 +445,7 @@ export const TranslationWorkspace: React.FC = () => {
               <button
                 type="button"
                 onClick={handleClear}
-                className="text-xs text-slate-400 hover:text-red-500 flex items-center gap-1 transition-colors"
+                className="text-xs text-slate-400 dark:text-slate-500 hover:text-red-500 dark:hover:text-red-400 flex items-center gap-1 transition-colors"
               >
                 <Trash2 className="w-3.5 h-3.5" />
                 Clear
@@ -470,20 +470,20 @@ export const TranslationWorkspace: React.FC = () => {
                   : "Type, paste text, or click the microphone to speak..."
               }
               maxLength={5000}
-              className="w-full flex-1 resize-none border-0 p-0 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-0 text-base leading-relaxed"
+              className="w-full flex-1 resize-none border-0 p-0 text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 bg-transparent focus:outline-none focus:ring-0 text-base leading-relaxed"
             />
 
             {/* Interim Speech Transcript Preview */}
             {isListening && interimTranscript && (
-              <div className="mt-1 p-2 bg-blue-50/70 border border-blue-200 rounded-lg text-xs text-blue-800 italic animate-fade-in flex items-center gap-1.5">
-                <Radio className="w-3.5 h-3.5 text-blue-600 animate-pulse flex-shrink-0" />
+              <div className="mt-1 p-2 bg-blue-50/70 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800 rounded-lg text-xs text-blue-800 dark:text-blue-300 italic animate-fade-in flex items-center gap-1.5">
+                <Radio className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 animate-pulse flex-shrink-0" />
                 <span>Hearing: &quot;{interimTranscript}&quot;</span>
               </div>
             )}
           </div>
 
           {/* Source Panel Bottom Toolbar */}
-          <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+          <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
             <div className="flex items-center gap-2">
               {/* Voice-to-Text Microphone Button */}
               <button
@@ -501,7 +501,7 @@ export const TranslationWorkspace: React.FC = () => {
                 className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                   isListening
                     ? "bg-red-600 text-white shadow-md shadow-red-500/30 animate-pulse hover:bg-red-700"
-                    : "bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 border border-slate-200 disabled:opacity-40"
+                    : "bg-slate-100 dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 border border-slate-200 dark:border-slate-700 disabled:opacity-40"
                 }`}
               >
                 {isListening ? (
@@ -511,7 +511,7 @@ export const TranslationWorkspace: React.FC = () => {
                   </>
                 ) : (
                   <>
-                    <Mic className="w-3.5 h-3.5 text-blue-600" />
+                    <Mic className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
                     <span>Voice Input</span>
                   </>
                 )}
@@ -534,13 +534,13 @@ export const TranslationWorkspace: React.FC = () => {
                 }
                 className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                   isSpeaking && speakingSide === "source"
-                    ? "bg-red-50 text-red-700 border border-red-200 animate-pulse hover:bg-red-100"
-                    : "text-slate-600 hover:text-blue-600 hover:bg-slate-100 disabled:opacity-40 disabled:hover:bg-transparent"
+                    ? "bg-red-50 dark:bg-red-950/50 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800 animate-pulse hover:bg-red-100"
+                    : "text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-40 disabled:hover:bg-transparent"
                 }`}
               >
                 {isSpeaking && speakingSide === "source" ? (
                   <>
-                    <Square className="w-3.5 h-3.5 fill-current text-red-600" />
+                    <Square className="w-3.5 h-3.5 fill-current text-red-600 dark:text-red-400" />
                     <span>Stop</span>
                   </>
                 ) : (
@@ -555,7 +555,7 @@ export const TranslationWorkspace: React.FC = () => {
             <div className="flex items-center gap-3">
               <span
                 className={`text-xs ${
-                  sourceText.length > 4500 ? "text-amber-600 font-semibold" : "text-slate-400"
+                  sourceText.length > 4500 ? "text-amber-600 dark:text-amber-400 font-semibold" : "text-slate-400 dark:text-slate-500"
                 }`}
               >
                 {sourceText.length.toLocaleString()} / 5,000
@@ -565,7 +565,7 @@ export const TranslationWorkspace: React.FC = () => {
                 type="button"
                 onClick={() => handleTranslate()}
                 disabled={isLoading || !sourceText.trim()}
-                className="inline-flex items-center gap-2 px-5 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-200 disabled:text-slate-400 text-white text-sm font-semibold rounded-lg shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer"
+                className="inline-flex items-center gap-2 px-5 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-200 dark:disabled:bg-slate-800 disabled:text-slate-400 dark:disabled:text-slate-600 text-white text-sm font-semibold rounded-lg shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer"
               >
                 {isLoading ? (
                   <>
@@ -581,36 +581,36 @@ export const TranslationWorkspace: React.FC = () => {
         </div>
 
         {/* Translated Text Panel */}
-        <div className="flex flex-col p-4 sm:p-6 bg-slate-50/50 relative">
+        <div className="flex flex-col p-4 sm:p-6 bg-slate-50/50 dark:bg-slate-950/40 relative">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+            <span className="text-xs font-semibold text-slate-400 dark:text-slate-400 uppercase tracking-wider">
               {getLanguageName(targetLang)}
             </span>
 
             {translatedText && (
-              <span className="text-xs text-slate-400 font-medium">
+              <span className="text-xs text-slate-400 dark:text-slate-500 font-medium">
                 {translatedText.length.toLocaleString()} characters
               </span>
             )}
           </div>
 
-          <div className="w-full flex-1 text-slate-800 text-base leading-relaxed overflow-y-auto max-h-[300px] whitespace-pre-wrap select-text">
+          <div className="w-full flex-1 text-slate-800 dark:text-slate-100 text-base leading-relaxed overflow-y-auto max-h-[300px] whitespace-pre-wrap select-text">
             {isLoading ? (
-              <div className="h-full flex flex-col items-center justify-center text-slate-400 gap-2 py-12">
-                <Loader2 className="w-6 h-6 animate-spin text-blue-600" />
+              <div className="h-full flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 gap-2 py-12">
+                <Loader2 className="w-6 h-6 animate-spin text-blue-600 dark:text-blue-400" />
                 <span className="text-sm">Converting across languages...</span>
               </div>
             ) : translatedText ? (
               translatedText
             ) : (
-              <span className="text-slate-400 select-none">
+              <span className="text-slate-400 dark:text-slate-500 select-none">
                 Translation will appear here instantly...
               </span>
             )}
           </div>
 
           {/* Target Panel Bottom Toolbar */}
-          <div className="mt-4 pt-3 border-t border-slate-200/60 flex items-center justify-between">
+          <div className="mt-4 pt-3 border-t border-slate-200/60 dark:border-slate-800 flex items-center justify-between">
             <div className="flex items-center gap-1.5">
               {/* Play / Stop Button for Translation */}
               <button
@@ -629,13 +629,13 @@ export const TranslationWorkspace: React.FC = () => {
                 }
                 className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                   isSpeaking && speakingSide === "target"
-                    ? "bg-red-50 text-red-700 border border-red-200 animate-pulse hover:bg-red-100"
-                    : "text-slate-600 hover:text-blue-600 hover:bg-slate-200/60 disabled:opacity-40 disabled:hover:bg-transparent"
+                    ? "bg-red-50 dark:bg-red-950/50 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800 animate-pulse hover:bg-red-100"
+                    : "text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-200/60 dark:hover:bg-slate-800 disabled:opacity-40 disabled:hover:bg-transparent"
                 }`}
               >
                 {isSpeaking && speakingSide === "target" ? (
                   <>
-                    <Square className="w-3.5 h-3.5 fill-current text-red-600" />
+                    <Square className="w-3.5 h-3.5 fill-current text-red-600 dark:text-red-400" />
                     <span>Stop</span>
                   </>
                 ) : (
@@ -653,9 +653,9 @@ export const TranslationWorkspace: React.FC = () => {
                 disabled={!translatedText}
                 title="Copy translation"
                 aria-label="Copy translation"
-                className="p-2 rounded-lg text-slate-500 hover:text-blue-600 hover:bg-slate-200/60 disabled:opacity-40 disabled:hover:bg-transparent transition-colors relative"
+                className="p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-200/60 dark:hover:bg-slate-800 disabled:opacity-40 disabled:hover:bg-transparent transition-colors relative"
               >
-                {copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
+                {copied ? <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-4 h-4" />}
               </button>
 
               {/* Download File Button */}
@@ -665,14 +665,14 @@ export const TranslationWorkspace: React.FC = () => {
                 disabled={!translatedText}
                 title="Download translation (.txt)"
                 aria-label="Download translation (.txt)"
-                className="p-2 rounded-lg text-slate-500 hover:text-blue-600 hover:bg-slate-200/60 disabled:opacity-40 disabled:hover:bg-transparent transition-colors"
+                className="p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-200/60 dark:hover:bg-slate-800 disabled:opacity-40 disabled:hover:bg-transparent transition-colors"
               >
                 <Download className="w-4 h-4" />
               </button>
             </div>
 
             {copied && (
-              <span className="text-xs text-emerald-600 font-medium animate-fade-in">
+              <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium animate-fade-in">
                 Copied to clipboard!
               </span>
             )}
@@ -682,8 +682,8 @@ export const TranslationWorkspace: React.FC = () => {
 
       {/* Translation API Error Alert Box */}
       {errorMessage && (
-        <div className="bg-red-50 border-t border-red-200 p-4 flex items-start gap-3 text-red-700">
-          <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+        <div className="bg-red-50 dark:bg-red-950/40 border-t border-red-200 dark:border-red-900 p-4 flex items-start gap-3 text-red-700 dark:text-red-300">
+          <AlertCircle className="w-5 h-5 text-red-500 dark:text-red-400 flex-shrink-0 mt-0.5" />
           <div className="flex-1 text-sm">
             <span className="font-semibold">Error: </span>
             {errorMessage}
@@ -691,7 +691,7 @@ export const TranslationWorkspace: React.FC = () => {
           <button
             type="button"
             onClick={() => handleTranslate()}
-            className="text-xs font-semibold text-red-700 underline hover:text-red-800"
+            className="text-xs font-semibold text-red-700 dark:text-red-400 underline hover:text-red-800 dark:hover:text-red-200"
           >
             Retry
           </button>

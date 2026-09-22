@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Globe, Lock, Mail, ArrowRight, AlertCircle, Loader2 } from "lucide-react";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -40,46 +41,50 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative transition-colors">
+      <div className="absolute top-6 right-6">
+        <ThemeToggle />
+      </div>
+
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
         <Link href="/" className="inline-flex items-center gap-2 mb-4">
           <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
             <Globe className="w-5 h-5" />
           </div>
-          <span className="text-2xl font-bold text-slate-900 tracking-tight">
-            LingoFlow<span className="text-blue-600">.ai</span>
+          <span className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
+            LingoFlow<span className="text-blue-600 dark:text-blue-400">.ai</span>
           </span>
         </Link>
-        <h2 className="text-2xl font-extrabold text-slate-900">
+        <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">
           Sign in to your account
         </h2>
-        <p className="mt-2 text-sm text-slate-600">
+        <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
           Or{" "}
-          <Link href="/signup" className="font-semibold text-blue-600 hover:text-blue-500">
+          <Link href="/signup" className="font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-500">
             create a free account
           </Link>
         </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0">
-        <div className="bg-white py-8 px-6 shadow-xl rounded-2xl border border-slate-200 sm:px-10">
+        <div className="bg-white dark:bg-slate-900 py-8 px-6 shadow-xl rounded-2xl border border-slate-200 dark:border-slate-800 sm:px-10 transition-colors">
           {error && (
-            <div className="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm flex items-start gap-2.5">
-              <AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
+            <div className="mb-6 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 text-red-700 dark:text-red-300 px-4 py-3 rounded-xl text-sm flex items-start gap-2.5">
+              <AlertCircle className="w-4 h-4 text-red-500 dark:text-red-400 flex-shrink-0 mt-0.5" />
               <span>{error}</span>
             </div>
           )}
 
           {/* Quick Demo Credentials Box */}
-          <div className="mb-6 p-3 bg-blue-50/60 border border-blue-200/80 rounded-xl text-xs text-blue-800">
+          <div className="mb-6 p-3 bg-blue-50/60 dark:bg-blue-950/40 border border-blue-200/80 dark:border-blue-800 rounded-xl text-xs text-blue-800 dark:text-blue-300">
             <span className="font-bold">Demo Account:</span>{" "}
-            <code className="bg-white/80 px-1.5 py-0.5 rounded border border-blue-200">demo@lingoflow.ai</code> /{" "}
-            <code className="bg-white/80 px-1.5 py-0.5 rounded border border-blue-200">password123</code>
+            <code className="bg-white/80 dark:bg-slate-800 px-1.5 py-0.5 rounded border border-blue-200 dark:border-blue-800">demo@lingoflow.ai</code> /{" "}
+            <code className="bg-white/80 dark:bg-slate-800 px-1.5 py-0.5 rounded border border-blue-200 dark:border-blue-800">password123</code>
           </div>
 
           <form className="space-y-5" onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-slate-700">
+              <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-300">
                 Email address
               </label>
               <div className="mt-1 relative rounded-md shadow-sm">
@@ -95,13 +100,13 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
-                  className="block w-full pl-10 pr-3 py-2 border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="block w-full pl-10 pr-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white bg-white dark:bg-slate-800 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-slate-700">
+              <label htmlFor="password" className="block text-sm font-medium text-slate-700 dark:text-slate-300">
                 Password
               </label>
               <div className="mt-1 relative rounded-md shadow-sm">
@@ -117,7 +122,7 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="block w-full pl-10 pr-3 py-2 border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="block w-full pl-10 pr-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white bg-white dark:bg-slate-800 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
             </div>
