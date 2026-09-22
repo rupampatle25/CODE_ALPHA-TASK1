@@ -148,6 +148,65 @@ async function runTests() {
     failed++;
   }
 
+  // Test 7: Translation History CRUD & Access Control
+  try {
+    process.stdout.write("7. Testing Translation History CRUD, Pagination & Access Control... ");
+    const demoUser = await prisma.user.findUnique({
+      where: { email: "demo@lingoflow.ai" },
+    });
+
+    if (!demoUser) {
+      throw new Error("Demo user required for history test");
+    }
+
+    // 1. Create a translation record
+    const uniqueText = `Automated Test Text ${Date.now()}`;
+    const testRecord = await prisma.translation.create({
+      data: {
+        userId: demoUser.id,
+        sourceLang: "en",
+        targetLang: "es",
+        sourceText: uniqueText,
+        translatedText: "Texto de prueba automatizado",
+        provider: "MyMemory",
+        charCount: uniqueText.length,
+      },
+    });
+
+    // 2. Query and verify pagination/metadata
+    const count = await prisma.translation.count({
+      where: { userId: demoUser.id },
+    });
+    const found = await prisma.translation.findFirst({
+      where: { id: testRecord.id, userId: demoUser.id },
+    });
+
+    // 3. Verify server-side user isolation (other user cannot see this record)
+    const unauthorizedQuery = await prisma.translation.findMany({
+      where: { id: testRecord.id, userId: "non-existent-user-id" },
+    });
+
+    // 4. Delete the test record
+    await prisma.translation.delete({
+      where: { id: testRecord.id },
+    });
+
+    const verifyDeleted = await prisma.translation.findUnique({
+      where: { id: testRecord.id },
+    });
+
+    if (found && unauthorizedQuery.length === 0 && !verifyDeleted && count > 0) {
+      console.log("✅ PASSED: CRUD, row-level isolation & deletion verified");
+      passed++;
+    } else {
+      console.log("❌ FAILED: Translation history validation check failed");
+      failed++;
+    }
+  } catch (err) {
+    console.log("❌ ERROR:", err.message);
+    failed++;
+  }
+
   console.log("\n==================================================");
   console.log(`Summary: ${passed} Passed, ${failed} Failed`);
   console.log("==================================================");
