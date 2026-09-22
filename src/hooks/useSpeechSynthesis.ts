@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 export interface SpeakOptions {
   text: string;
   langCode: string;
-  side: "source" | "target";
+  side: "source" | "target" | "adapted";
   voiceURI?: string;
   rate?: number;
   pitch?: number;
@@ -14,7 +14,7 @@ export interface SpeakOptions {
 export interface UseSpeechSynthesisReturn {
   isSupported: boolean;
   isSpeaking: boolean;
-  speakingSide: "source" | "target" | null;
+  speakingSide: "source" | "target" | "adapted" | null;
   speechError: string | null;
   clearError: () => void;
   voices: SpeechSynthesisVoice[];
@@ -27,7 +27,7 @@ export function useSpeechSynthesis(): UseSpeechSynthesisReturn {
   const [isSupported, setIsSupported] = useState(false);
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [speakingSide, setSpeakingSide] = useState<"source" | "target" | null>(null);
+  const [speakingSide, setSpeakingSide] = useState<"source" | "target" | "adapted" | null>(null);
   const [speechError, setSpeechError] = useState<string | null>(null);
 
   // Keep track of current utterance to prevent garbage collection issues in some browsers
