@@ -8,8 +8,6 @@ import {
   Languages,
   History,
   ShoppingBag,
-  CreditCard,
-  Settings,
   LogOut,
   Sparkles,
 } from "lucide-react";
@@ -74,22 +72,6 @@ export default async function DashboardLayout({
                   BIZ
                 </span>
               </div>
-            </Link>
-
-            <Link
-              href="/dashboard/billing"
-              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800 hover:text-white transition-colors"
-            >
-              <CreditCard className="w-4 h-4 text-amber-400" />
-              <span>Plans & Billing</span>
-            </Link>
-
-            <Link
-              href="/dashboard/settings"
-              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800 hover:text-white transition-colors"
-            >
-              <Settings className="w-4 h-4 text-slate-400" />
-              <span>Settings</span>
             </Link>
           </nav>
         </div>
