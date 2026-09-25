@@ -68,7 +68,6 @@
 - 🔐 **Authentication & Session Security:** Complete sign-up, sign-in, and password reset flows with bcrypt password hashing and tamper-proof HTTP-only JWT sessions.
 - 📜 **Personal Translation History:** Automatically archives translations for authenticated users with search, pagination, single-item deletion, and bulk purging.
 - 📈 **Quota & Usage Limiting:** Real-time monthly character quota tracking (Free Starter: 5,000 chars; Pro Creator: 100,000 chars).
-- 💳 **Payment Gateway Architecture:** Dual-gateway design supporting **Razorpay** (India UPI/Cards) and **Stripe** (International currencies) with idempotent webhook processing.
 - 🌓 **Zero-FOUC Dark / Light Theme:** Custom theme switcher with persistent preferences stored in `localStorage` and system preference detection.
 
 ---

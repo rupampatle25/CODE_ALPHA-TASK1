@@ -5,10 +5,8 @@ import {
   CreditCard,
   CheckCircle2,
   Sparkles,
-  ShieldCheck,
   AlertCircle,
   Loader2,
-  ExternalLink,
 } from "lucide-react";
 
 export default function BillingPage() {
@@ -191,31 +189,8 @@ export default function BillingPage() {
         </div>
       </div>
 
-      {/* Payment Gateway Architecture Disclosure */}
-      <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs max-w-4xl space-y-4">
-        <div className="flex items-center gap-2 text-slate-900 font-bold">
-          <ShieldCheck className="w-5 h-5 text-blue-600" />
-          <span>Payment Provider Integration Architecture</span>
-        </div>
-
-        <p className="text-sm text-slate-600 leading-relaxed">
-          BhashaSetu is designed with a dual-gateway architecture:
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-600">
-          <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
-            <span className="font-bold text-slate-900 block mb-1">Domestic / India (Razorpay)</span>
-            Supports UPI (Google Pay, PhonePe, Paytm), Netbanking, and Indian credit/debit cards. Webhooks verified with HMAC-SHA256 signatures.
-          </div>
-          <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
-            <span className="font-bold text-slate-900 block mb-1">International (Stripe)</span>
-            Global multi-currency credit card processing, Apple Pay, and Google Pay with SCA (Strong Customer Authentication) 3D Secure 2.
-          </div>
-        </div>
-
-        <div className="text-xs text-slate-400">
-          * For your college demonstration, you can click &quot;Upgrade to Pro (Instant Demo)&quot; to simulate a verified transaction and unlock 100,000 characters without live credit card charges.
-        </div>
+      <div className="text-xs text-slate-400 max-w-4xl text-center">
+        * For testing and demonstration, you can click &quot;Upgrade to Pro (Instant Demo)&quot; to simulate a verified transaction and unlock 100,000 characters without live credit card charges.
       </div>
     </div>
   );

@@ -49,7 +49,7 @@ This guarantees:
 3. Easy addition of future vendors (e.g. DeepL, AWS Translate, Azure Translator).
 
 ### 2.2 Payment & Webhook Idempotency Pattern
-When payment providers (Razorpay or Stripe) trigger webhooks upon successful subscription payments, network retries can send duplicate webhook notifications.
+When payment providers trigger webhooks upon successful subscription payments, network retries can send duplicate webhook notifications.
 
 To prevent double-crediting or race conditions, BhashaSetu utilizes the **Idempotency Key Pattern** via the `PaymentEvent` table:
 1. Webhook receives event payload with unique `eventId`.
